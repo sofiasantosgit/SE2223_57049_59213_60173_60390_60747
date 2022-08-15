@@ -22,6 +22,7 @@ import biz.ganttproject.lib.fx.treetable.VirtualFlow
 import biz.ganttproject.FXUtil
 import biz.ganttproject.app.MenuBuilder
 import biz.ganttproject.app.MenuBuilderFx
+import biz.ganttproject.lib.fx.treetable.TreeTableRowSkin
 import biz.ganttproject.lib.fx.treetable.TreeTableViewSkin
 import biz.ganttproject.walkTree
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
@@ -308,7 +309,7 @@ class MyVirtualFlow<T: IndexedCell<*>> : VirtualFlow<T>() {
 }
 
 class MyTreeTableRow<T> : TreeTableRow<T>() {
-  //override fun createDefaultSkin() = TreeTableRowSkin(this)
+  override fun createDefaultSkin() = TreeTableRowSkin(this)
 
   init {
     disclosureNode = HBox().also { hbox ->

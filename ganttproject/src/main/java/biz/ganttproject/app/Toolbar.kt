@@ -19,11 +19,8 @@ along with GanttProject.  If not, see <http://www.gnu.org/licenses/>.
 package biz.ganttproject.app
 
 import biz.ganttproject.FXUtil
-import biz.ganttproject.core.option.FontSpec
 import biz.ganttproject.lib.fx.applicationFont
-import biz.ganttproject.lib.fx.applicationFontSpec
 import biz.ganttproject.walkTree
-import javafx.application.Platform
 import javafx.beans.property.SimpleObjectProperty
 import javafx.collections.FXCollections
 import javafx.embed.swing.JFXPanel
@@ -38,6 +35,7 @@ import javafx.scene.control.*
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.text.Font
+import javafx.util.Callback
 import net.sourceforge.ganttproject.action.GPAction
 import net.sourceforge.ganttproject.gui.ActionUtil
 import java.awt.event.KeyAdapter
@@ -114,11 +112,11 @@ fun createButton(action: GPAction, onlyIcon: Boolean = true): Button? {
 }
 
 private fun applyFontStyle(node: Parent) {
-  Platform.runLater {
+  FXUtil.runLater {
     node.walkTree {
-      node.styleClass.removeIf { it.startsWith("app-font-") }
-      node.styleClass.add("app-font-${(applicationFontSpec.value?.size?.name ?: FontSpec.Size.NORMAL.name).lowercase()}")
-      node.style = """-fx-font-family: ${applicationFont.value.family} """
+      if (node is Labeled) {
+        node.font = applicationFont.value
+      }
     }
   }
 }
@@ -146,15 +144,31 @@ private class DropdownVisitor(val actions: List<GPAction>, val appFont: SimpleOb
           actions[comboBox.selectionModel.selectedIndex].actionPerformed(null)
         }
       }
-      appFont?.addListener { _, _, _ -> applyFontStyle(comboBox) }
-      applyFontStyle(comboBox)
+      //appFont?.addListener { _, _, _ -> applyFontStyle(comboBox) }
+      //applyFontStyle(comboBox)
       actions[0].localizedNameObservable.addListener { _, _, _ ->  comboBox.items.setAll(actions.map {action ->
         action.localizedNameObservable.let {
           it.value
         }
       }.toList())}
       toolbar.toolbar.items.add(comboBox)
+      comboBox.cellFactory  = Callback { DropdownCellImpl(appFont!!) }
+      comboBox.buttonCell = DropdownCellImpl(appFont!!)
     }
+  }
+}
+
+class DropdownCellImpl(private val appFont: SimpleObjectProperty<Font>) : ListCell<String>() {
+  override fun updateItem(item: String?, empty: Boolean) {
+    super.updateItem(item, empty)
+    if (item == null || empty) {
+      text = ""
+      graphic = null
+      return
+    }
+    text = item
+    font = appFont.value
+    //style = """-fx-font-family: ${appFont.value.family}; -fx-font-size: ${appFont.value.size } """
   }
 }
 
