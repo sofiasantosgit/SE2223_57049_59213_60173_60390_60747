@@ -5,3 +5,9 @@ Design Pattern: Factory Method Pattern
 -> De resto parece-me tudo bem, pois tens uma interface LocalApi que é implementada
 nas classes e depois tens o metodo createGanttCalendar que utiliza o objeto que tem a tua
 interface. Isto tudo dentro de uma classe chamada CalendarFactory.
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Decorator Pattern
+
+-> Interface, base object and decorators nicely pointed out.
+-> Looks good to me!
