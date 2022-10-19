@@ -2,4 +2,4 @@ Reviewer Name: Guilherme Fernandes
 Design Pattern: Facade Pattern
 
 -> Should add some explanation regarding the complexity hidden by the facade (methods/classes)
--> Location of use and general idea of classes used is given correctly, lgtm!
+-> Location of the main call and general idea of classes used is given correctly, lgtm!
