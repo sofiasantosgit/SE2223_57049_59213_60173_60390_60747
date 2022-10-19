@@ -4,3 +4,8 @@ Design Pattern: Singleton Method Pattern
 -> Deverias mostrar o construtor da class MiltonResource
 -> Deverias identificar melhor o teu static member, o teu static factory method
 
+---------------------
+Reviewer Name: Rui Correia
+Design Pattern: Command pattern
+
+-> Explain how each command is interpreted and executed.
