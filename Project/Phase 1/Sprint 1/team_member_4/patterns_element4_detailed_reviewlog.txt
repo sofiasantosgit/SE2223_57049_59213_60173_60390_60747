@@ -1,0 +1,6 @@
+Reviewer Name: Pedro Grilo
+Design Pattern: Singleton Method Pattern
+
+-> Deverias mostrar o construtor da class MiltonResource
+-> Deverias identificar melhor o teu static member, o teu static factory method
+
