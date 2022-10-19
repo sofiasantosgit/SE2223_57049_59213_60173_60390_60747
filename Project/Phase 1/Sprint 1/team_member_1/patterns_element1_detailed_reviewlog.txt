@@ -6,6 +6,8 @@ Design Pattern: Factory Method Pattern
 nas classes e depois tens o metodo createGanttCalendar que utiliza o objeto que tem a tua
 interface. Isto tudo dentro de uma classe chamada CalendarFactory.
 
+-----------------------------------------------------------------------------------------------------------------------
+
 Reviewer Name: Guilherme Fernandes
 Design Pattern: Decorator Pattern
 
