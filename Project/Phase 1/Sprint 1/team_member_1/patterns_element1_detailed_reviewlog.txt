@@ -13,3 +13,10 @@ Design Pattern: Decorator Pattern
 
 -> Interface, base object and decorators nicely pointed out.
 -> Looks good to me!
+
+---------------------------
+Reviewer Name: Rui Correia
+Design Pattern: Adapter design pattern
+
+-> Maybe show some more classes where the adapter is used.
+-> Other than that it looks fine.
