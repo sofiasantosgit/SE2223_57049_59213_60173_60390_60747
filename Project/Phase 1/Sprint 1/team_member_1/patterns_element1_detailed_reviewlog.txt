@@ -1,0 +1,7 @@
+Reviewer Name: Pedro Grilo
+Design Pattern: Factory Method Pattern
+
+-> Deverias mostrar um bocado do construtor da class GanttCalendar
+-> De resto parece-me tudo bem, pois tens uma interface LocalApi que é implementada
+nas classes e depois tens o metodo createGanttCalendar que utiliza o objeto que tem a tua
+interface. Isto tudo dentro de uma classe chamada CalendarFactory.
