@@ -1,0 +1,17 @@
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Template Method Pattern
+
+-> Should add some more info about the subclasses (maybe some pics or explanation of implementation)
+-> Apart from that looks good to me!
+
+---------------------
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Decorator Method Pattern
+
+-> Parece tudo ótimo, pois mostra a classe abstrata OptionPageProviderBase
+e identificas todas as classes que utilizam essa abstrata.
+Todas essas classes adicionam funcionalidades ao objeto sem alterar a estrutura,
+tal como é pedido no Decorator Pattern.
+
+-> Podia ter prints de snippets de code das classes que utilizam OptionPageProviderBase

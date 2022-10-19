@@ -1,0 +1,12 @@
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Facade Pattern
+
+-> Should add some explanation regarding the complexity hidden by the facade (methods/classes)
+-> Location of the main call and general idea of classes used is given correctly, lgtm!
+
+--------------------------
+
+Reviewer Name: Rui Correia
+Design Pattern: Proxy design pattern
+
+-> Maybe explain how that interface is used in those classes
