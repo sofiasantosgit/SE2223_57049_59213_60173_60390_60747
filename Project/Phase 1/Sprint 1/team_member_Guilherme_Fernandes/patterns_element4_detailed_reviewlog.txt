@@ -1,5 +1,5 @@
 Reviewer Name: Pedro Grilo
-Design Pattern: Singleton Method Pattern
+Design Pattern: Singleton Pattern
 
 -> Deverias mostrar o construtor da class MiltonResource
 -> Deverias identificar melhor o teu static member, o teu static factory method
@@ -9,3 +9,12 @@ Reviewer Name: Rui Correia
 Design Pattern: Command pattern
 
 -> Explain how each command is interpreted and executed.
+
+---------------------
+
+Reviewer Name: Sofia Santos
+Design Pattern: Singleton Pattern
+
+-> All code snippets should have a label identifying their exact location on the codebase.
+
+-> The explanation as for why it's a Singleton is not enough. There should be an explanation about how the "myUIConfig" is this class' uniqueInstance, and that clients access the sole instance of UIConfiguration only using its access point "getUIConfiguration".
