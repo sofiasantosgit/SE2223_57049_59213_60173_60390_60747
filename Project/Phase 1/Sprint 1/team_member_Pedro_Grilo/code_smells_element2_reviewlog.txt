@@ -3,3 +3,9 @@ Code Smell: Speculative Generality
 
 -> Lacks a suggestion of a different implementation.
 -> Other than that looks good!
+--------------------
+Reviewer Name: Tomas Mondim
+Code Smell: Long Parameter List
+
+-> Poderia ser mais especifico e conciso na alteracao, seja para os parametros seja para os comentarios, que apesar de ser obvio nao sugere alteracao.
+->De resto parece me bem!
