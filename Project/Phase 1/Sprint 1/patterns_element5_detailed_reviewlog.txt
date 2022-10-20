@@ -1,0 +1,6 @@
+Reviewer Name: Sofia Santos
+Design Pattern: Decorator Pattern
+
+Not sure if this is a Decorator Pattern.
+-> The concrete decorators CalendarActivityImpl and CalendarEvent aren't subclasses of the base decorator GPCalendarBase. 
+-> If GPCalendarBase implements GPCalendarCalc, then that should be the component interface, and there should be code snippets of it. 
