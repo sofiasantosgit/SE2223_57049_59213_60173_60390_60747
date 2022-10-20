@@ -10,3 +10,11 @@ Reviewer Name: Rui Correia
 Design Pattern: Proxy design pattern
 
 -> Maybe explain how that interface is used in those classes
+
+--------------------------
+
+Reviewer Name: Sofia Santos
+Design Pattern: Factory Method Pattern
+
+-> The exact location of the code snippets in the codebase should be provided.
+-> Should show a code snippet of the Factory Method "createIconFactory" and explain that that's the main way to obtain instances of the class FontAwesomeIcon. Hiding the creation of objects is the purpose of this pattern.
