@@ -1,5 +1,5 @@
 Reviewer Name: Guilherme Fernandes
-Design Pattern: Speculative Generality
+Code Smell: Speculative Generality
 
 -> Lacks a suggestion of a different implementation.
 -> Other than that looks good!

@@ -1,0 +1,5 @@
+Reviewer Name: Pedro Grilo
+Code Smell: Dead Code
+
+-> Boa indentificação do code smell e uma boa sugestão!
+-> Podia ter uma melhor apresentação, mas de resto ta otimo
