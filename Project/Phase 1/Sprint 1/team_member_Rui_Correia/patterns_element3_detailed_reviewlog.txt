@@ -15,3 +15,11 @@ Todas essas classes adicionam funcionalidades ao objeto sem alterar a estrutura,
 tal como é pedido no Decorator Pattern.
 
 -> Podia ter prints de snippets de code das classes que utilizam OptionPageProviderBase
+
+---------------------
+Reviewer Name: Tomás Mondim
+Design Pattern: Interpreter Method Pattern
+
+->Deveria ter uma explicaçao sobre o o porquê desta classe usar o Interpreter Method
+->De resto está simples e claro!
+
