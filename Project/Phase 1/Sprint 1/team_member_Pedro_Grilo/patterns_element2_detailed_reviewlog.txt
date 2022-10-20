@@ -1,8 +1,8 @@
-Reviewer Name: Guilherme Fernandes
+Reviewer Name: Tomás Mondim
 Design Pattern: Facade Pattern
 
--> Should add some explanation regarding the complexity hidden by the facade (methods/classes)
--> Location of the main call and general idea of classes used is given correctly, lgtm!
+-> Parece-me bem, apenas peca de uma explicação sobre o porque deste ser um Facade Pattern
+->Falta tambem a localização das classes
 
 --------------------------
 
