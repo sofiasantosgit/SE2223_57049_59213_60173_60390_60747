@@ -3,7 +3,7 @@ Code Smell: Switch statement
 
 -> Good find and good suggestion
 ---------------------
-Reviewer Name: Tomás Mondim
+Reviewer Name: Pedro Grilo
 Code Smell: Dead Code
 
 -> Parece me correto!
