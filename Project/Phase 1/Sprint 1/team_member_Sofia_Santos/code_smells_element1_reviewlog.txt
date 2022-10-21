@@ -2,3 +2,9 @@ Reviewer Name: Rui Correia
 Code Smell: Switch statement
 
 -> Good find and good suggestion
+---------------------
+Reviewer Name: Tomás Mondim
+Code Smell: Dead Code
+
+-> Poderia ter mostrado chamadas ao metodo em que fosse enviado um parametro morto
+->De resto parece estar certo
