@@ -4,3 +4,13 @@ Design Pattern: Decorator Pattern
 Not sure if this is a Decorator Pattern.
 -> The concrete decorators CalendarActivityImpl and CalendarEvent aren't subclasses of the base decorator GPCalendarBase. 
 -> If GPCalendarBase implements GPCalendarCalc, then that should be the component interface, and there should be code snippets of it. 
+
+--------------------------------------------------------
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Singleton Design Pattern
+
+-> Está correto, pois garante que o GanttLookAndFeels cria apenas um, usando assim o return do singleton.
+-> Podias mostrar uma print do snippet do code onde é usado
+-> De resto tá otimo
+
