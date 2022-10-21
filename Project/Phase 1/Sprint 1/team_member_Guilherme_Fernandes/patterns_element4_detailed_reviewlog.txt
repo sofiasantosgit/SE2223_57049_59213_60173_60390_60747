@@ -9,3 +9,12 @@ Reviewer Name: Rui Correia
 Design Pattern: Command pattern
 
 -> Explain how each command is interpreted and executed.
+
+----------------------
+Reviewer Name: Rui Correia
+Design Pattern: Template Method Pattern
+
+-> Should add some more info about the subclasses (maybe some pics or explanation of implementation)
+-> Apart from that looks good to me!
+
+---------------------
