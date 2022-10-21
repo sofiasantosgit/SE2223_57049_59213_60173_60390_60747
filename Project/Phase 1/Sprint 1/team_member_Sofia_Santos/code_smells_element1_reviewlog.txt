@@ -1,0 +1,4 @@
+Reviewer Name: Rui Correia
+Code Smell: Switch statement
+
+-> Good find and good suggestion
