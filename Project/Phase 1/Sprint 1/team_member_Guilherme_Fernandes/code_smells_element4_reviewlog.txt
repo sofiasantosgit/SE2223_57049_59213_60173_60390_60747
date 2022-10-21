@@ -1,3 +1,11 @@
+Reviewer Name: Rui Correia
+Code Smell: Dead Code
+
+-> Boa identificação do code smell e uma boa sugestão
+-> Podia ter uma melhor apresentação, mas de resto está bom
+
+----------------------------
+
 Reviewer Name: Tomás Mondim
 Code Smell: No comments / Long method
 
