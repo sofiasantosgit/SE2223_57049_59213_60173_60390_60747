@@ -1,0 +1,7 @@
+Reviewer Name: Pedro Grilo
+Code Smell: Duplicated Code
+
+-> Sim, refereste a código duplicado, mas a tua sugestão podia ter que o catch
+podia ter um "OR" como condição e assim também evitava a repetição de código.
+-> De resto está ok!
+
