@@ -9,9 +9,9 @@ interface. Isto tudo dentro de uma classe chamada CalendarFactory.
 -----------------------------------------------------------------------------------------------------------------------
 
 Reviewer Name: Guilherme Fernandes
-Design Pattern: Decorator Pattern
+Design Pattern: Adapter Pattern
 
--> Interface, base object and decorators nicely pointed out.
+-> Adapter class and target interface nicely pointed out.
 -> Looks good to me!
 
 ---------------------------
