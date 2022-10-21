@@ -1,8 +1,8 @@
-Reviewer Name: Pedro Grilo
+Reviewer Name: Tomás Mondim
 Design Pattern: Singleton Pattern
 
--> Deverias mostrar o construtor da class MiltonResource
--> Deverias identificar melhor o teu static member, o teu static factory method
+-> Deverias explicar a print 1, passa um pouco despercebido o porque de teres colocado a print.
+->De resto parece me certo!
 
 ---------------------
 Reviewer Name: Rui Correia
