@@ -1,11 +1,3 @@
-Reviewer Name: Pedro Grilo
-Code Smell: Dead Code
-
--> Boa identificação do code smell e uma boa sugestão!
--> Podia ter uma melhor apresentação, mas de resto está ótimo
-
----------------------------
-
 Reviewer Name: Tomás Mondim
 Code Smell: No comments / Long method
 
