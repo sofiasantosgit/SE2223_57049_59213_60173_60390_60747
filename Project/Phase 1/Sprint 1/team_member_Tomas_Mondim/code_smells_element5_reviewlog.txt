@@ -1,0 +1,7 @@
+Reviewer Name: Sofia Santos
+Code Smell: Duplicated Code
+
+-> The code smell identification seems to be correct, and the suggestion makes sense.
+-> The explanation could have some grammar fixes.
+
+---------------------------
