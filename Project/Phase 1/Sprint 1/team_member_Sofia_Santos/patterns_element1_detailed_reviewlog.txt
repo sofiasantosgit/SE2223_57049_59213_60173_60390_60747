@@ -9,9 +9,9 @@ interface. Isto tudo dentro de uma classe chamada CalendarFactory.
 -----------------------------------------------------------------------------------------------------------------------
 
 Reviewer Name: Guilherme Fernandes
-Design Pattern: Adapter Pattern
+Design Pattern: Facade Pattern
 
--> Adapter class and target interface nicely pointed out.
+-> Facade class and interfaces nicely pointed out. Bonus points for the uml diagram!
 -> Looks good to me!
 
 ---------------------------
