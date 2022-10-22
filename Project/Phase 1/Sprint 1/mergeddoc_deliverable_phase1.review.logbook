@@ -1,0 +1,112 @@
+Sofia Santos
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Factory Method Pattern
+
+-> Deverias mostrar um bocado do construtor da class GanttCalendar
+-> De resto parece-me tudo bem, pois tens uma interface LocalApi que é implementada
+nas classes e depois tens o metodo createGanttCalendar que utiliza o objeto que tem a tua
+interface. Isto tudo dentro de uma classe chamada CalendarFactory.
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Facade Pattern
+
+-> Facade class and interfaces nicely pointed out. Bonus points for the uml diagram!
+-> Looks good to me!
+
+Reviewer Name: Rui Correia
+Design Pattern: Adapter design pattern
+
+-> Maybe show some more classes where the adapter is used.
+-> Other than that it looks fine.
+
+---------------------
+
+Pedro Grilo
+
+Reviewer Name: Tomás Mondim
+Design Pattern: Facade Pattern
+
+-> Parece-me bem, apenas peca de uma explicação sobre o porque deste ser um Facade Pattern
+->Falta tambem a localização das classes
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Proxy design pattern
+
+-> Maybe explain how that interface is used in those classes
+
+Reviewer Name: Sofia Santos
+Design Pattern: Factory Method Pattern
+
+-> The exact location of the code snippets in the codebase should be provided.
+-> Should show a code snippet of the Factory Method "createIconFactory" and explain that that's the main way to obtain instances of the class FontAwesomeIcon. Hiding the creation of objects is the purpose of this pattern.
+
+---------------------
+
+Rui Correia
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Decorator Method Pattern
+
+-> Parece tudo ótimo, pois mostra a classe abstrata OptionPageProviderBase
+e identificas todas as classes que utilizam essa abstrata.
+Todas essas classes adicionam funcionalidades ao objeto sem alterar a estrutura,
+tal como é pedido no Decorator Pattern.
+
+-> Podia ter prints de snippets de code das classes que utilizam OptionPageProviderBase
+
+Reviewer Name: Tomás Mondim
+Design Pattern: Interpreter Method Pattern
+
+->Deveria ter uma explicaçao sobre o o porquê desta classe usar o Interpreter Method
+->De resto está simples e claro!
+
+Reviewer Name: Sofia Santos
+Design Pattern: Singleton Pattern
+
+-> All code snippets should have a label identifying their exact location on the codebase.
+
+-> The explanation as for why it's a Singleton is not enough. There should be an explanation about how the "myUIConfig" is this class' uniqueInstance, and that clients access the sole instance of UIConfiguration only using its access point "getUIConfiguration".
+
+---------------------
+
+Guilherme Fernandes
+
+Reviewer Name: Tomás Mondim
+Design Pattern: Singleton Pattern
+
+-> Deverias explicar a print 1, passa um pouco despercebido o porque de teres colocado a print.
+->De resto parece me certo!
+
+Reviewer Name: Rui Correia
+Design Pattern: Command pattern
+
+-> Explain how each command is interpreted and executed.
+
+Reviewer Name: Rui Correia
+Design Pattern: Template Method Pattern
+
+-> Should add some more info about the subclasses (maybe some pics or explanation of implementation)
+-> Apart from that looks good to me!
+
+---------------------
+
+Tomás Mondim
+
+Reviewer Name: Sofia Santos
+Design Pattern: Decorator Pattern
+
+-> The identification of the Decorator design pattern seems to be correct, with all the class relationships required by this pattern.
+-> There should be some grammar fixes in the report.
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Singleton Design Pattern
+
+-> Está correto, pois garante que o GanttLookAndFeels cria apenas um, usando assim o return do singleton.
+-> Podias mostrar uma print do snippet do code onde é usado
+-> De resto está otimo
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Façade Design Pattern
+
+-> Should explain the complexity hidden behind the façade.
