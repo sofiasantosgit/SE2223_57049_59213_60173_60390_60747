@@ -13,3 +13,10 @@ Design Pattern: Singleton Design Pattern
 -> Podias mostrar uma print do snippet do code onde é usado
 -> De resto tá otimo
 
+
+-----------------------------------------------------------
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Façade Design Pattern
+
+-> Should explain the complexity hidden behind the façade.

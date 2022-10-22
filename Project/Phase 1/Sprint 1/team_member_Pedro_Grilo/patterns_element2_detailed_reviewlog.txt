@@ -6,7 +6,7 @@ Design Pattern: Facade Pattern
 
 --------------------------
 
-Reviewer Name: Rui Correia
+Reviewer Name: Guilherme Fernandes
 Design Pattern: Proxy design pattern
 
 -> Maybe explain how that interface is used in those classes
