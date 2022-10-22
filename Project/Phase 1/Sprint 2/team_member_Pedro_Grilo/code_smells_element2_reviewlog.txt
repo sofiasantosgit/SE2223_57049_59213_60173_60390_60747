@@ -1,0 +1,20 @@
+Reviewer Name: Guilherme Fernandes
+Code Smell: Speculative Generality
+
+-> Lacks a suggestion of a different implementation.
+-> Other than that looks good!
+
+--------------------
+
+Reviewer Name: Tomás Mondim
+Code Smell: Long Parameter List
+
+-> Poderia ser mais específico e conciso na alteração, seja para os parâmetros seja para os comentários, que apesar de ser óbvio não sugere alteração.
+-> De resto parece me bem!
+
+--------------------
+
+Reviewer Name: Sofia Santos
+Code Smell: Dead Code
+
+-> The identification of the code smell seems to be correct, and the suggestion is clear enough.

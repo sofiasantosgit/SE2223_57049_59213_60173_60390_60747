@@ -1,0 +1,15 @@
+Reviewer Name: Rui Correia
+Code Smell: Switch statement
+
+-> Good find and good suggestion
+---------------------
+Reviewer Name: Pedro Grilo
+Code Smell: Dead Code
+
+-> Parece me correto!
+
+---------------------
+Reviewer Name: Guilherme Fernandes
+Code Smell: Long Parameter List
+
+-> Looks good to me!
