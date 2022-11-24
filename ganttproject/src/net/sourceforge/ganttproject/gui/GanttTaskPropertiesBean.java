@@ -62,10 +62,18 @@ import java.awt.event.FocusEvent;
 public class GanttTaskPropertiesBean extends JPanel {
 
   private ColorOption myTaskColorOption = new DefaultColorOption("");
+
   private final GPAction mySetDefaultColorAction = new GPAction("defaultColor") {
     @Override
     public void actionPerformed(ActionEvent e) {
       myTaskColorOption.setValue(myUIfacade.getGanttChart().getTaskDefaultColorOption().getValue());
+    }
+  };
+
+  private final GPAction myFileAction = new GPAction("file") {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println("olaaaa");
     }
   };
   private JXDatePicker myEarliestBeginDatePicker;
@@ -91,7 +99,13 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private JTextField tfWebLink;
 
+  private JTextField tfFile;
+
   private JButton bWebLink;
+
+  private JButton bFile;
+
+  private JFileChooser fileChooser = new JFileChooser();
 
   private JSpinner percentCompleteSlider;
 
@@ -251,6 +265,29 @@ public class GanttTaskPropertiesBean extends JPanel {
     });
     propertiesPanel.add(new JLabel(language.getText("webLink")));
     propertiesPanel.add(weblinkBox);
+
+    //TODO  FILE:
+
+
+    Box fontBox = Box.createHorizontalBox();
+    fontBox.add(new JXHyperlink(myFileAction), BorderLayout.CENTER);
+    bFile = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/web_16.gif")));
+    bFile.setToolTipText(GanttProject.getToolTip(language.getText("file")));
+    fontBox.add(bFile);
+
+    bFile.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // link to open the web link
+        fileChooser.showSaveDialog(null);
+      }
+    });
+    propertiesPanel.add(new JLabel(language.getText("file")));
+    propertiesPanel.add(fontBox);
+
+
+
+
 
     SpringUtilities.makeCompactGrid(propertiesPanel, propertiesPanel.getComponentCount() / 2, 2, 1, 1, 5, 5);
 
