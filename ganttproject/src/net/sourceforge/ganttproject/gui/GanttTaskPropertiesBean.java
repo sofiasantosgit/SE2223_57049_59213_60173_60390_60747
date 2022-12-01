@@ -32,10 +32,7 @@ import net.sourceforge.ganttproject.action.GPAction;
 import net.sourceforge.ganttproject.gui.UIUtil.DateValidator;
 import net.sourceforge.ganttproject.gui.options.OptionsPageBuilder;
 import net.sourceforge.ganttproject.gui.options.SpringUtilities;
-import net.sourceforge.ganttproject.gui.taskproperties.CustomColumnsPanel;
-import net.sourceforge.ganttproject.gui.taskproperties.TaskAllocationsPanel;
-import net.sourceforge.ganttproject.gui.taskproperties.TaskDependenciesPanel;
-import net.sourceforge.ganttproject.gui.taskproperties.TaskScheduleDatesPanel;
+import net.sourceforge.ganttproject.gui.taskproperties.*;
 import net.sourceforge.ganttproject.language.GanttLanguage;
 import net.sourceforge.ganttproject.resource.HumanResourceManager;
 import net.sourceforge.ganttproject.roles.RoleManager;
@@ -70,12 +67,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     }
   };
 
-  private final GPAction myFileAction = new GPAction("file") {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      System.out.println("olaaaa");
-    }
-  };
+
   private JXDatePicker myEarliestBeginDatePicker;
 
   private GanttTask[] selectedTasks;
@@ -88,6 +80,9 @@ public class GanttTaskPropertiesBean extends JPanel {
                                   // items
 
   private JPanel generalPanel;
+
+  private JPanel filePanel;
+
 
   private JComponent predecessorsPanel;
 
@@ -156,6 +151,8 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private TaskDependenciesPanel myDependenciesPanel;
 
+  private TaskFilesPanel myFilesPanel;
+
   private TaskAllocationsPanel myAllocationsPanel;
 
   private final HumanResourceManager myHumanResourceManager;
@@ -189,8 +186,14 @@ public class GanttTaskPropertiesBean extends JPanel {
   }
 
   private void constructFilePanel(){
-    final JPanel propertiesPanel = new JPanel(new SpringLayout());
-    propertiesPanel.add(new JLabel(language.getText("fileChooser.fileList")));
+
+    //TODO  FILE: 1. Add a file to the task
+    //TODO  FILE: 2. Remove a file from the task
+    //TODO  FILE: 3. Open a file from the task
+
+    myFilesPanel = new TaskFilesPanel();
+    myFilesPanel.init(selectedTasks[0]);
+    filePanel = myFilesPanel.getComponent();
   }
 
   /** Construct the general panel */
@@ -270,29 +273,6 @@ public class GanttTaskPropertiesBean extends JPanel {
     });
     propertiesPanel.add(new JLabel(language.getText("webLink")));
     propertiesPanel.add(weblinkBox);
-
-    //TODO  FILE:
-
-
-    Box fontBox = Box.createHorizontalBox();
-    fontBox.add(new JXHyperlink(myFileAction), BorderLayout.CENTER);
-    bFile = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/web_16.gif")));
-    bFile.setToolTipText(GanttProject.getToolTip(language.getText("file")));
-    fontBox.add(bFile);
-
-    bFile.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        // link to open the web link
-        fileChooser.showSaveDialog(null);
-      }
-    });
-    propertiesPanel.add(new JLabel(language.getText("file")));
-    propertiesPanel.add(fontBox);
-
-
-
-
 
     SpringUtilities.makeCompactGrid(propertiesPanel, propertiesPanel.getComponentCount() / 2, 2, 1, 1, 5, 5);
 
@@ -385,9 +365,12 @@ public class GanttTaskPropertiesBean extends JPanel {
       }
     };
     constructGeneralPanel();
-
     tabbedPane.addTab(language.getText("general"), new ImageIcon(getClass().getResource("/icons/properties_16.gif")),
         generalPanel);
+
+    constructFilePanel();
+    tabbedPane.addTab(language.getText("fileChooser.fileList"), new ImageIcon(getClass().getResource("/icons/link_16.gif")),
+        filePanel);
 
     constructPredecessorsPanel();
     tabbedPane.addTab(language.getText("predecessors"), new ImageIcon(getClass().getResource("/icons/relashion.gif")),
