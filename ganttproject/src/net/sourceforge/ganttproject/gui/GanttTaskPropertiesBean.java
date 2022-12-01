@@ -44,6 +44,7 @@ import net.sourceforge.ganttproject.task.Task;
 import net.sourceforge.ganttproject.task.TaskContainmentHierarchyFacade;
 import net.sourceforge.ganttproject.task.TaskManager;
 import net.sourceforge.ganttproject.task.TaskMutator;
+import net.sourceforge.ganttproject.task.Todo.TodoList;
 import net.sourceforge.ganttproject.util.BrowserControl;
 import net.sourceforge.ganttproject.util.collect.Pair;
 import org.jdesktop.swingx.JXDatePicker;
@@ -126,6 +127,8 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private JPanel secondRowPanelNotes;
 
+  private JPanel thirdRowPanelTodo;
+
   private String originalName;
 
   private String originalWebLink;
@@ -169,6 +172,8 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private JCheckBox myShowInTimeline;
   private AbstractAction myOnEarliestBeginToggle;
+
+  private TodoList todoList;
 
   public GanttTaskPropertiesBean(GanttTask[] selectedTasks, IGanttProject project, UIFacade uifacade) {
     myTaskScheduleDates = new TaskScheduleDatesPanel(uifacade);
@@ -285,14 +290,6 @@ public class GanttTaskPropertiesBean extends JPanel {
     propertiesPanel.add(new JLabel(language.getText("file")));
     propertiesPanel.add(fontBox);
 
-
-    /* TOMAS */
-    propertiesPanel.add(new JLabel(language.getText("name")));
-    nameField1 = new JTextField(20);
-    nameField1.setName("name_of_task");
-    propertiesPanel.add(nameField1);
-    /* --------------------------------*/
-
     SpringUtilities.makeCompactGrid(propertiesPanel, propertiesPanel.getComponentCount() / 2, 2, 1, 1, 5, 5);
 
     JPanel propertiesWrapper = new JPanel(new BorderLayout());
@@ -300,20 +297,11 @@ public class GanttTaskPropertiesBean extends JPanel {
     generalPanel = new JPanel(new SpringLayout());
     //generalPanel.add(new JLayer<JPanel>(propertiesPanel, layerUi));
     generalPanel.add(propertiesWrapper);
-    generalPanel.add(notesPanel);
 
-    /* -------------------------
-    JPanel todoPanel = new JPanel(new SpringLayout());
-    UIUtil.createTitle(todoPanel, language.getText("todo"));
-
-    todoPanel.add(new JLabel(language.getText("projectTask")));
-    todoPanel.add(new JCheckBox());
-    SpringUtilities.makeCompactGrid(todoPanel, todoPanel.getComponentCount() / 2, 2, 1, 1, 5, 5);
-    JPanel todoWrapper = new JPanel(new BorderLayout());
-    todoWrapper.add(todoPanel, BorderLayout.CENTER);
-
-    generalPanel.add(todoWrapper);
-     ------------------------- */
+    JPanel sideWrapper = new JPanel(new BorderLayout());
+    sideWrapper.add(notesPanel, BorderLayout.NORTH);
+    sideWrapper.add(thirdRowPanelTodo, BorderLayout.SOUTH);
+    generalPanel.add(sideWrapper);
     SpringUtilities.makeCompactGrid(generalPanel, 1, 2, 1, 1, 10, 5);
   }
 
@@ -373,7 +361,7 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   /** Construct the notes panel */
   private void constructNotesPanel() {
-    secondRowPanelNotes = new JPanel(new SpringLayout());
+    secondRowPanelNotes = new JPanel(new BorderLayout());
     UIUtil.createTitle(secondRowPanelNotes, language.getText("notesTask"));
 
     noteAreaNotes = new JTextArea(8, 40);
@@ -382,13 +370,19 @@ public class GanttTaskPropertiesBean extends JPanel {
     noteAreaNotes.setBackground(new Color(1.0f, 1.0f, 1.0f));
 
     scrollPaneNotes = new JScrollPane(noteAreaNotes);
-    secondRowPanelNotes.add(scrollPaneNotes);
-    secondRowPanelNotes.add(new JLabel(language.getText("colors")));
+    secondRowPanelNotes.add(scrollPaneNotes, BorderLayout.CENTER);
+    notesPanel = secondRowPanelNotes;
+  }
 
-    SpringUtilities.makeCompactGrid(secondRowPanelNotes, secondRowPanelNotes.getComponentCount(), 1, 1, 1, 5, 5);
+  private void constructTodoPanel() {
+    thirdRowPanelTodo = new JPanel(new SpringLayout());
+    UIUtil.createTitle(thirdRowPanelTodo, language.getText("todo"));
 
-    notesPanel = new JPanel(new BorderLayout());
-    notesPanel.add(secondRowPanelNotes, BorderLayout.CENTER);
+
+
+    thirdRowPanelTodo.add(new JLabel("NOME DA TASK"));
+    thirdRowPanelTodo.add(new JCheckBox());
+    SpringUtilities.makeCompactGrid(thirdRowPanelTodo, thirdRowPanelTodo.getComponentCount()/2, 2, 1, 1, 5, 5);
   }
 
 
@@ -396,6 +390,7 @@ public class GanttTaskPropertiesBean extends JPanel {
   /** Initialize the widgets */
   private void init() {
     constructNotesPanel();
+    constructTodoPanel();
 
     tabbedPane = new JTabbedPane() {
       @Override
