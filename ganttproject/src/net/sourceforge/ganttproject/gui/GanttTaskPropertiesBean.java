@@ -188,6 +188,11 @@ public class GanttTaskPropertiesBean extends JPanel {
     form.add(Box.createRigidArea(new Dimension(1, 10)));
   }
 
+  private void constructFilePanel(){
+    final JPanel propertiesPanel = new JPanel(new SpringLayout());
+    propertiesPanel.add(new JLabel(language.getText("fileChooser.fileList")));
+  }
+
   /** Construct the general panel */
   private void constructGeneralPanel() {
     final JPanel propertiesPanel = new JPanel(new SpringLayout());
