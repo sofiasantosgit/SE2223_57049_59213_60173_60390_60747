@@ -20,6 +20,7 @@ package net.sourceforge.ganttproject.gui.taskproperties;
 
 import net.sourceforge.ganttproject.gui.AbstractTableAndActionsComponent;
 import net.sourceforge.ganttproject.gui.UIUtil;
+import net.sourceforge.ganttproject.task.FileCollection;
 import net.sourceforge.ganttproject.task.Task;
 import net.sourceforge.ganttproject.task.TaskManager;
 import net.sourceforge.ganttproject.task.dependency.TaskDependency;
@@ -45,7 +46,7 @@ import java.util.List;
  * @author Guilherme Fernandes
  */
 public class TaskFilesPanel {
-  private Task myTask;
+  private FileCollection myFileCollection;
   private FilesTableModel myModel;
   private JTable myTable;
 
@@ -54,12 +55,10 @@ public class TaskFilesPanel {
   }
 
   public JPanel getComponent() {
-    myModel = new FilesTableModel(myTask);
+    myModel = new FilesTableModel(myFileCollection);
     myTable = new JTable(myModel);
     UIUtil.setupTableUI(myTable);
     UIUtil.setupTableUI(getTable());
-
-    setUpPredecessorComboColumn(FilesTableModel.MyColumn.FILE_NAME.getTableColumn(getTable()), getTable());
 
     AbstractTableAndActionsComponent<TaskDependency> tableAndActions = new AbstractTableAndActionsComponent<TaskDependency>(
         getTable()) {
@@ -75,84 +74,17 @@ public class TaskFilesPanel {
         }
         myModel.delete(getTable().getSelectedRows());
       }
-
-      @Override
-      protected TaskDependency getValue(int row) {
-        List<TaskDependency> dependencies = myModel.getDependencies();
-        return (row >= 0 && row < dependencies.size()) ? dependencies.get(row) : null;
-      }
     };
 
     return CommonPanel.createTableAndActions(myTable, tableAndActions.getActionsComponent());
   }
 
-  public void init(Task task) {
-    myTask = task;
+  public void init(FileCollection fileCollection) {
+    myFileCollection = fileCollection;
   }
 
-  public void commit() {
-    if (myTable.isEditing()) {
-      myTable.getCellEditor().stopCellEditing();
-    }
-    myModel.commit();
+  private FileCollection getFiles() {
+    return myFileCollection;
   }
 
-  private Task getTask() {
-    return myTask;
-  }
-
-  private void setUpPredecessorComboColumn(TableColumn predecessorColumn, final JTable predecessorTable) {
-    final JComboBox<DependencyTableModel.TaskComboItem> comboBox = new JComboBox<>();
-
-    Task[] possiblePredecessors = getTaskManager().getAlgorithmCollection().getFindPossibleDependeesAlgorithm().run(
-        getTask());
-
-    int maxDigits = 0;
-    for (Task next : possiblePredecessors) {
-      comboBox.addItem(new DependencyTableModel.TaskComboItem(next));
-      maxDigits = Math.max(maxDigits, (int) Math.log10(next.getTaskID()));
-    }
-    final int maxWidth = (maxDigits + 1) * 10;
-
-    comboBox.setRenderer(new DefaultListCellRenderer() {
-      private JLabel myId = new JLabel();
-      private JXLabel myLabel = new JXLabel();
-      private JPanel myBox = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 3));
-
-      {
-        myId.setEnabled(false);
-        myId.setHorizontalAlignment(SwingConstants.RIGHT);
-        myBox.add(myId);
-        myBox.add(myLabel);
-        myBox.setOpaque(true);
-      }
-
-      @Override
-      public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        DependencyTableModel.TaskComboItem item = (DependencyTableModel.TaskComboItem) value;
-        TaskManager taskManager = item.myTask.getManager();
-        JComponent superResult = (JComponent) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        if (index == -1) {
-          return superResult;
-        }
-        myId.setPreferredSize(new Dimension(maxWidth, 10));
-        myId.setFont(superResult.getFont().deriveFont(superResult.getFont().getSize() * 0.85f));
-        myId.setText(String.valueOf(item.myTask.getTaskID()));
-        myLabel.setText(item.myTask.getName());
-        myLabel.setBorder(BorderFactory.createEmptyBorder(0,
-            10 * (taskManager.getTaskHierarchy().getDepth(item.myTask) - 1),
-            0, 0));
-        myBox.setBorder(superResult.getBorder());
-        myBox.setBackground(superResult.getBackground());
-        myBox.setForeground(superResult.getForeground());
-        return myBox;
-      }
-    });
-    comboBox.setEditable(false);
-    predecessorColumn.setCellEditor(new DefaultCellEditor(comboBox));
-  }
-
-  private TaskManager getTaskManager() {
-    return getTask().getManager();
-  }
 }

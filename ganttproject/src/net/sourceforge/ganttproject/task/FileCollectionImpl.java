@@ -18,36 +18,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 package net.sourceforge.ganttproject.task;
 
+import net.sourceforge.ganttproject.resource.HumanResource;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 class FileCollectionImpl implements FileCollection {
 
-  File[] files;
-
-  int counter;
-
-  public FileCollectionImpl(){
-
-    counter = 0;
-
-  }
+  private final Map<String, File> files = new HashMap<>();
 
 
   @Override
-  public File[] getFiles() {
-    return files;
+  public Collection<File> getFiles() {
+    return files.values();
   }
 
   @Override
   public void addFile(File file) {
 
-    files[counter] = file;
-    counter++;
+    files.put(file.getFileName(), file);
 
   }
 
   @Override
   public void deleteFile(File file) {
 
-
+    files.remove(file.getFileName());
 
   }
 }

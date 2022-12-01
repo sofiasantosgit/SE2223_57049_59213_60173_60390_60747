@@ -192,7 +192,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     //TODO  FILE: 3. Open a file from the task
 
     myFilesPanel = new TaskFilesPanel();
-    myFilesPanel.init(selectedTasks[0]);
+    //myFilesPanel.init(selectedTasks[0]);
     filePanel = myFilesPanel.getComponent();
   }
 

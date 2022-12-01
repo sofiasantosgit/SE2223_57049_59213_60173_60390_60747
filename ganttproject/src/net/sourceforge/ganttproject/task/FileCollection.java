@@ -20,12 +20,16 @@ package net.sourceforge.ganttproject.task;
 
 import net.sourceforge.ganttproject.resource.HumanResource;
 
+import java.util.Collection;
+import java.util.Map;
+
 /**
- * @author bard
+ * @author Pedro Grilo
+ * @author Guilherme Nisa
  */
 public interface FileCollection {
 
-  File[] getFiles();
+  Collection<File> getFiles();
 
   void addFile(File file);
 

@@ -21,6 +21,9 @@ package net.sourceforge.ganttproject.gui.taskproperties;
 import com.google.common.base.Objects;
 import net.sourceforge.ganttproject.GPLogger;
 import net.sourceforge.ganttproject.language.GanttLanguage;
+import net.sourceforge.ganttproject.task.File;
+import net.sourceforge.ganttproject.task.FileCollection;
+import net.sourceforge.ganttproject.task.ResourceAssignment;
 import net.sourceforge.ganttproject.task.Task;
 import net.sourceforge.ganttproject.task.dependency.TaskDependency;
 import net.sourceforge.ganttproject.task.dependency.TaskDependency.Hardness;
@@ -45,6 +48,19 @@ import java.util.List;
 public class FilesTableModel extends AbstractTableModel {
   private static final boolean EDITABLE = true;
   private static final boolean NOT_EDITABLE = false;
+
+  private final List<File> myFiles;
+
+  public void delete(int[] selectedRows) {
+    List<File> selected = new ArrayList<File>();
+    for (int row : selectedRows) {
+      if (row < myFiles.size()) {
+        selected.add(myFiles.get(row));
+      }
+    }
+    myFiles.removeAll(selected);
+    fireTableDataChanged();
+  }
 
   public static enum MyColumn {
     FILE_NAME(GanttLanguage.getInstance().getText("file"), FilesTableModel.NOT_EDITABLE),
@@ -71,24 +87,10 @@ public class FilesTableModel extends AbstractTableModel {
     }
   }
 
-  private final List<TaskDependency> myDependencies;
-
-  private final TaskDependencyCollectionMutator myMutator;
-
-  private final Task myTask;
-
   public FilesTableModel(FileCollection fileColection) {
-    myDependencies = new ArrayList<TaskDependency>(Arrays.asList(task.getDependenciesAsDependant().toArray()));
-    myMutator = task.getManager().getDependencyCollection().createMutator();
-    myTask = task;
-  }
 
-  List<TaskDependency> getDependencies() {
-    return Collections.unmodifiableList(myDependencies);
-  }
+    myFiles = new ArrayList<File>((fileColection.getFiles()));
 
-  public void commit() {
-    myMutator.commit();
   }
 
   @Override
@@ -98,7 +100,7 @@ public class FilesTableModel extends AbstractTableModel {
 
   @Override
   public int getRowCount() {
-    return myDependencies.size() + 1;
+    return myFiles.size() + 1;
   }
 
   @Override
@@ -109,21 +111,21 @@ public class FilesTableModel extends AbstractTableModel {
   @Override
   public Object getValueAt(int row, int col) {
     assert row >= 0 && row < getRowCount() && col >= 0 && col < getColumnCount();
-    if (row == myDependencies.size()) {
+    if (row == myFiles.size()) {
       return "";
     }
 
-    TaskDependency dep = myDependencies.get(row);
+    File file = myFiles.get(row);
     MyColumn column = MyColumn.values()[col];
     switch (column) {
-    case FILE_NAME: {
-      return dep.getDependee().getTaskID();
-    }
-    case FILE_URL: {
-      return new TaskComboItem(dep.getDependee());
-    }
-    default:
-      throw new IllegalArgumentException("Illegal row number=" + row);
+      case FILE_NAME: {
+        return file.getFileName();
+      }
+      case FILE_URL: {
+        return file.getURL();
+      }
+      default:
+        throw new IllegalArgumentException("Illegal row number=" + row);
     }
   }
 
@@ -135,7 +137,10 @@ public class FilesTableModel extends AbstractTableModel {
 
   @Override
   public void setValueAt(Object value, int row, int col) {
-    assert row >= 0;
+
+    System.out.println("safjbabsfka");
+
+    /*assert row >= 0;
     if (Objects.equal(value, getValueAt(row, col))) {
       return;
     }
@@ -150,95 +155,6 @@ public class FilesTableModel extends AbstractTableModel {
         e.printStackTrace(System.err);
       }
     }
-    fireTableCellUpdated(row, col);
-  }
-
-  private void updateDependency(Object value, int row, int col) throws TaskDependencyException {
-    TaskDependency dep = myDependencies.get(row);
-    switch (col) {
-    case 4:
-      dep.setHardness((Hardness) value);
-      break;
-    case 3: {
-      int loadAsInt = Integer.parseInt(String.valueOf(value));
-      dep.setDifference(loadAsInt);
-      break;
-    }
-    case 2: {
-      TaskDependencyConstraint clone;
-      try {
-        clone = (TaskDependencyConstraint) ((ConstraintImpl) value).clone();
-      } catch (CloneNotSupportedException e) {
-        throw new RuntimeException(e);
-      }
-      dep.setConstraint(clone);
-      break;
-    }
-    case 1: {
-      myMutator.deleteDependency(dep);
-      dep.delete();
-      myDependencies.remove(row);
-      if (value == null) {
-        fireTableRowsDeleted(row, row);
-      } else {
-        Task selectedTask = ((TaskComboItem) value).myTask;
-        TaskDependency newDependency = myMutator.createDependency(myTask, selectedTask, new FinishStartConstraintImpl());
-        myDependencies.add(newDependency);
-      }
-    }
-    }
-  }
-
-  public void delete(int[] selectedRows) {
-    List<TaskDependency> selected = new ArrayList<TaskDependency>();
-    for (int row : selectedRows) {
-      selected.add(myDependencies.get(row));
-    }
-    for (TaskDependency d : selected) {
-      d.delete();
-    }
-    myDependencies.removeAll(selected);
-    fireTableDataChanged();
-  }
-
-  private void createDependency(Object value) throws TaskDependencyException {
-    if (value instanceof TaskComboItem) {
-      Task selectedTask = ((TaskComboItem) value).myTask;
-      TaskDependency dep = myMutator.createDependency(myTask, selectedTask, new FinishStartConstraintImpl());
-      dep.setHardness(Hardness.parse(myTask.getManager().getDependencyHardnessOption().getValue()));
-      myDependencies.add(dep);
-      fireTableRowsInserted(myDependencies.size(), myDependencies.size());
-    }
-  }
-
-  static class TaskComboItem {
-    final String myText;
-
-    final Task myTask;
-
-    TaskComboItem(Task task) {
-      myTask = task;
-      myText = "[#" + task.getTaskID() + "] " + task.getName();
-    }
-
-    @Override
-    public String toString() {
-      return myTask.getName();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-      if (obj instanceof TaskComboItem == false) {
-        return false;
-      }
-      TaskComboItem value = (TaskComboItem) obj;
-      return myTask.getTaskID() == value.myTask.getTaskID();
-    }
-
-    @Override
-    public int hashCode() {
-      return myTask.getTaskID();
-    }
-
+    fireTableCellUpdated(row, col);*/
   }
 }
