@@ -64,7 +64,8 @@ public class TaskFilesPanel {
         getTable()) {
       @Override
       protected void onAddEvent() {
-        getTable().editCellAt(myModel.getRowCount() - 1, DependencyTableModel.MyColumn.TASK_NAME.ordinal());
+
+        System.out.println("Add file");
       }
 
       @Override

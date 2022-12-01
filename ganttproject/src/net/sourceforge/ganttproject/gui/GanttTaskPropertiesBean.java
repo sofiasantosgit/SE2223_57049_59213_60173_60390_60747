@@ -37,10 +37,7 @@ import net.sourceforge.ganttproject.language.GanttLanguage;
 import net.sourceforge.ganttproject.resource.HumanResourceManager;
 import net.sourceforge.ganttproject.roles.RoleManager;
 import net.sourceforge.ganttproject.shape.JPaintCombo;
-import net.sourceforge.ganttproject.task.Task;
-import net.sourceforge.ganttproject.task.TaskContainmentHierarchyFacade;
-import net.sourceforge.ganttproject.task.TaskManager;
-import net.sourceforge.ganttproject.task.TaskMutator;
+import net.sourceforge.ganttproject.task.*;
 import net.sourceforge.ganttproject.util.BrowserControl;
 import net.sourceforge.ganttproject.util.collect.Pair;
 import org.jdesktop.swingx.JXDatePicker;
@@ -157,6 +154,8 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private final HumanResourceManager myHumanResourceManager;
 
+  private FileCollection myFileCollection;
+
   private final RoleManager myRoleManager;
 
   private Task myUnpluggedClone;
@@ -192,7 +191,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     //TODO  FILE: 3. Open a file from the task
 
     myFilesPanel = new TaskFilesPanel();
-    //myFilesPanel.init(selectedTasks[0]);
+    myFilesPanel.init(new FileCollectionImpl());
     filePanel = myFilesPanel.getComponent();
   }
 

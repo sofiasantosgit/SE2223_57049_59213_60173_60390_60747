@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-class FileCollectionImpl implements FileCollection {
+public class FileCollectionImpl implements FileCollection {
 
   private final Map<String, File> files = new HashMap<>();
 
