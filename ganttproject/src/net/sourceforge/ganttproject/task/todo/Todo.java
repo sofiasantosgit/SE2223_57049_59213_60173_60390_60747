@@ -1,4 +1,4 @@
-package net.sourceforge.ganttproject.task.todo.TodoList;
+package net.sourceforge.ganttproject.task.todo;
 public class Todo {
     private String description;
     private boolean done;

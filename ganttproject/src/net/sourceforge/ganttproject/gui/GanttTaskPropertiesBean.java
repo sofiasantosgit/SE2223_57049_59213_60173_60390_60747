@@ -44,7 +44,7 @@ import net.sourceforge.ganttproject.task.Task;
 import net.sourceforge.ganttproject.task.TaskContainmentHierarchyFacade;
 import net.sourceforge.ganttproject.task.TaskManager;
 import net.sourceforge.ganttproject.task.TaskMutator;
-import net.sourceforge.ganttproject.task.Todo.TodoList;
+import net.sourceforge.ganttproject.task.todo.TodoList;
 import net.sourceforge.ganttproject.util.BrowserControl;
 import net.sourceforge.ganttproject.util.collect.Pair;
 import org.jdesktop.swingx.JXDatePicker;
@@ -97,6 +97,8 @@ public class GanttTaskPropertiesBean extends JPanel {
   private JPanel notesPanel;
 
   private JTextField nameField1;
+
+  private JTextField nameFieldTodo;
 
   private JTextField tfWebLink;
 
@@ -212,7 +214,15 @@ public class GanttTaskPropertiesBean extends JPanel {
 
     constructEarliestBegin(propertiesPanel);
     addEmptyRow(propertiesPanel);
-
+    /* TOMAS */
+    propertiesPanel.add(new JLabel(language.getText("addTodo")));
+    nameFieldTodo = new JTextField(20);
+    nameFieldTodo.setName("name_of_Todo");
+    propertiesPanel.add(nameFieldTodo);
+    String str = nameFieldTodo.getText();
+    if(str!=null)
+    todoList.add(str);
+    /* --------------------------------*/
     propertiesPanel.add(new JLabel(language.getText("priority")));
     priorityComboBox = new JComboBox();
     for (Task.Priority p : Task.Priority.values()) {

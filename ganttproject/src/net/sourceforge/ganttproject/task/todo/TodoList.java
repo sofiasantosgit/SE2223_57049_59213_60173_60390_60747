@@ -1,4 +1,4 @@
-package net.sourceforge.ganttproject.task.todo.TodoList;
+package net.sourceforge.ganttproject.task.todo;
 
 import java.util.ArrayList;
 import java.util.List;
