@@ -77,7 +77,7 @@ public class FilesTableModel extends AbstractTableModel {
 
   private final Task myTask;
 
-  public FilesTableModel(Task task) {
+  public FilesTableModel(FileCollection fileColection) {
     myDependencies = new ArrayList<TaskDependency>(Arrays.asList(task.getDependenciesAsDependant().toArray()));
     myMutator = task.getManager().getDependencyCollection().createMutator();
     myTask = task;
