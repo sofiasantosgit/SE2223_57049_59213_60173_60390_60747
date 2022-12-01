@@ -286,8 +286,12 @@ public class GanttTaskPropertiesBean extends JPanel {
     propertiesPanel.add(fontBox);
 
 
-
-
+    /* TOMAS */
+    propertiesPanel.add(new JLabel(language.getText("name")));
+    nameField1 = new JTextField(20);
+    nameField1.setName("name_of_task");
+    propertiesPanel.add(nameField1);
+    /* --------------------------------*/
 
     SpringUtilities.makeCompactGrid(propertiesPanel, propertiesPanel.getComponentCount() / 2, 2, 1, 1, 5, 5);
 
@@ -297,6 +301,19 @@ public class GanttTaskPropertiesBean extends JPanel {
     //generalPanel.add(new JLayer<JPanel>(propertiesPanel, layerUi));
     generalPanel.add(propertiesWrapper);
     generalPanel.add(notesPanel);
+
+    /* -------------------------
+    JPanel todoPanel = new JPanel(new SpringLayout());
+    UIUtil.createTitle(todoPanel, language.getText("todo"));
+
+    todoPanel.add(new JLabel(language.getText("projectTask")));
+    todoPanel.add(new JCheckBox());
+    SpringUtilities.makeCompactGrid(todoPanel, todoPanel.getComponentCount() / 2, 2, 1, 1, 5, 5);
+    JPanel todoWrapper = new JPanel(new BorderLayout());
+    todoWrapper.add(todoPanel, BorderLayout.CENTER);
+
+    generalPanel.add(todoWrapper);
+     ------------------------- */
     SpringUtilities.makeCompactGrid(generalPanel, 1, 2, 1, 1, 10, 5);
   }
 
@@ -356,7 +373,7 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   /** Construct the notes panel */
   private void constructNotesPanel() {
-    secondRowPanelNotes = new JPanel(new BorderLayout());
+    secondRowPanelNotes = new JPanel(new SpringLayout());
     UIUtil.createTitle(secondRowPanelNotes, language.getText("notesTask"));
 
     noteAreaNotes = new JTextArea(8, 40);
@@ -365,9 +382,16 @@ public class GanttTaskPropertiesBean extends JPanel {
     noteAreaNotes.setBackground(new Color(1.0f, 1.0f, 1.0f));
 
     scrollPaneNotes = new JScrollPane(noteAreaNotes);
-    secondRowPanelNotes.add(scrollPaneNotes, BorderLayout.CENTER);
-    notesPanel = secondRowPanelNotes;
+    secondRowPanelNotes.add(scrollPaneNotes);
+    secondRowPanelNotes.add(new JLabel(language.getText("colors")));
+
+    SpringUtilities.makeCompactGrid(secondRowPanelNotes, secondRowPanelNotes.getComponentCount(), 1, 1, 1, 5, 5);
+
+    notesPanel = new JPanel(new BorderLayout());
+    notesPanel.add(secondRowPanelNotes, BorderLayout.CENTER);
   }
+
+
 
   /** Initialize the widgets */
   private void init() {
