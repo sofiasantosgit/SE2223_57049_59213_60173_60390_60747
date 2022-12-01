@@ -1,4 +1,5 @@
 package net.sourceforge.ganttproject.task.todo;
+
 public class Todo {
     private String description;
     private boolean done;
@@ -14,6 +15,9 @@ public class Todo {
     }
     public void done(){
         done = true;
+    }
+    public void undone(){
+        done = false;
     }
     public void changeDescription(String desc){
         description = desc;

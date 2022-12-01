@@ -1,18 +1,33 @@
 package net.sourceforge.ganttproject.task.todo;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 
 public class TodoList {
-    private final List<Todo> list;
-    public TodoList(){
+    private static TodoList single_list = null;
+    private final ArrayList<Todo> list;
+    private TodoList(){
         list = new ArrayList<>();
     }
-    public void add(String str){
-        list.add(new Todo(str));
+    public int add(String name){
+        list.add(new Todo(name));
+        return list.size();
     }
-    public Iterator<Todo> list(){
-        return list.iterator();
+    public Todo get(int i) {
+        return list.get(i);
+    }
+    public void markDone(int i) {
+        list.get(i).done();
+    }
+    public void markUndone(int i) {
+        list.get(i).undone();
+    }
+    public ArrayList<Todo> list(){
+        return list;
+    }
+    public static TodoList getInstance() {
+        if (single_list == null)
+            single_list = new TodoList();
+
+        return single_list;
     }
 }
