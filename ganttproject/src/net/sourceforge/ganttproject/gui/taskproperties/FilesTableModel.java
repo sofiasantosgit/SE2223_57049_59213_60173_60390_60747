@@ -21,10 +21,7 @@ package net.sourceforge.ganttproject.gui.taskproperties;
 import com.google.common.base.Objects;
 import net.sourceforge.ganttproject.GPLogger;
 import net.sourceforge.ganttproject.language.GanttLanguage;
-import net.sourceforge.ganttproject.task.File;
-import net.sourceforge.ganttproject.task.FileCollection;
-import net.sourceforge.ganttproject.task.ResourceAssignment;
-import net.sourceforge.ganttproject.task.Task;
+import net.sourceforge.ganttproject.task.*;
 import net.sourceforge.ganttproject.task.dependency.TaskDependency;
 import net.sourceforge.ganttproject.task.dependency.TaskDependency.Hardness;
 import net.sourceforge.ganttproject.task.dependency.TaskDependencyCollectionMutator;
@@ -138,7 +135,6 @@ public class FilesTableModel extends AbstractTableModel {
   @Override
   public void setValueAt(Object value, int row, int col) {
 
-    System.out.println("safjbabsfka");
 
     /*assert row >= 0;
     if (Objects.equal(value, getValueAt(row, col))) {
@@ -156,5 +152,10 @@ public class FilesTableModel extends AbstractTableModel {
       }
     }
     fireTableCellUpdated(row, col);*/
+  }
+
+  public void addFile(File file) {
+    myFiles.add(file);
+    fireTableDataChanged();
   }
 }

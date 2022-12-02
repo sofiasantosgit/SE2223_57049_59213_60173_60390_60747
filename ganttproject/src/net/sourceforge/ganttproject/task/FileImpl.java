@@ -24,7 +24,7 @@ import net.sourceforge.ganttproject.roles.Role;
 
 import java.util.*;
 
-class FileImpl implements File {
+public class FileImpl implements File {
 
   String fileName;
   String url;

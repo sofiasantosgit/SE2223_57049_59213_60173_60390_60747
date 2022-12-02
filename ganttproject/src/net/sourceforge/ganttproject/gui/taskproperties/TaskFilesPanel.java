@@ -21,6 +21,7 @@ package net.sourceforge.ganttproject.gui.taskproperties;
 import net.sourceforge.ganttproject.gui.AbstractTableAndActionsComponent;
 import net.sourceforge.ganttproject.gui.UIUtil;
 import net.sourceforge.ganttproject.task.FileCollection;
+import net.sourceforge.ganttproject.task.FileImpl;
 import net.sourceforge.ganttproject.task.Task;
 import net.sourceforge.ganttproject.task.TaskManager;
 import net.sourceforge.ganttproject.task.dependency.TaskDependency;
@@ -49,6 +50,11 @@ public class TaskFilesPanel {
   private FileCollection myFileCollection;
   private FilesTableModel myModel;
   private JTable myTable;
+  private JFileChooser fileChooser = new JFileChooser();
+
+  public TaskFilesPanel(FileCollection fileCollection){
+    myFileCollection = fileCollection;
+  }
 
   private JTable getTable() {
     return myTable;
@@ -66,6 +72,12 @@ public class TaskFilesPanel {
       protected void onAddEvent() {
 
         System.out.println("Add file");
+        int returnVal = fileChooser.showSaveDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+          File file = fileChooser.getSelectedFile();
+          myModel.addFile(new FileImpl(file.getName(), file.getAbsolutePath()));
+        }
+
       }
 
       @Override

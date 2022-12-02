@@ -173,6 +173,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     myHumanResourceManager = project.getHumanResourceManager();
     myRoleManager = project.getRoleManager();
     myTaskManager = project.getTaskManager();
+    myFileCollection = myTaskManager.getFiles();
     myProject = project;
     myUIfacade = uifacade;
     init();
@@ -190,8 +191,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     //TODO  FILE: 2. Remove a file from the task
     //TODO  FILE: 3. Open a file from the task
 
-    myFilesPanel = new TaskFilesPanel();
-    myFilesPanel.init(new FileCollectionImpl());
+    myFilesPanel = new TaskFilesPanel(myFileCollection);
     filePanel = myFilesPanel.getComponent();
   }
 

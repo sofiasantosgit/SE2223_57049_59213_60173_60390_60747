@@ -94,6 +94,8 @@ public class TaskImpl implements Task {
 
   private int myCompletionPercentage;
 
+  private FileCollection myFileCollection;
+
   private TimeDuration myLength;
 
   private final List<TaskActivity> myActivities = new ArrayList<TaskActivity>();
@@ -206,6 +208,8 @@ public class TaskImpl implements Task {
     };
     return result;
   }
+
+
 
   class MutatorException extends RuntimeException {
     public MutatorException(String msg) {
@@ -943,6 +947,8 @@ public class TaskImpl implements Task {
     myName = (name == null ? null : name.trim());
   }
 
+
+
   @Override
   public void setWebLink(String webLink) {
     myWebLink = webLink;
@@ -1121,6 +1127,11 @@ public class TaskImpl implements Task {
       progressEventSender.enable();
       progressEventSender.fireEvent();
     }
+  }
+
+
+  public void setFilesCollection(FileCollection fileCollection){
+    myFileCollection = fileCollection;
   }
 
   @Override

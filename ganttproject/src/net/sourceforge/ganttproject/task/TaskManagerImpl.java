@@ -398,6 +398,9 @@ public class TaskManagerImpl implements TaskManager {
           task.getCost().setCalculated(false);
           task.getCost().setValue(myCost);
         }
+        if(fileCollection != null) {
+           task.setFilesCollection(fileCollection);
+        }
         registerTask(task);
 
 
@@ -417,6 +420,11 @@ public class TaskManagerImpl implements TaskManager {
         return task;
       }
     };
+  }
+  @Override
+  public FileCollection getFiles() {
+    System.out.println("AQUIIIIIIIIIIIIIIIIIIIIIII");
+    return new FileCollectionImpl();
   }
 
   protected TimeUnitStack getTimeUnitStack() {
@@ -702,6 +710,8 @@ public class TaskManagerImpl implements TaskManager {
       }
     };
   }
+
+
   public void fireTaskProgressChanged(Task changedTask) {
     if (areEventsEnabled) {
       TaskPropertyEvent e = new TaskPropertyEvent(changedTask);

@@ -47,6 +47,8 @@ import java.util.Map;
  * @author bard
  */
 public interface TaskManager {
+
+
   abstract class TaskBuilder {
     String myName;
     Integer myId;
@@ -64,6 +66,12 @@ public interface TaskManager {
     Priority myPriority;
     Task myPrototype;
     BigDecimal myCost;
+    FileCollection fileCollection;
+
+    public TaskBuilder withFileCollection(FileCollection fileCollection) {
+      this.fileCollection = fileCollection;
+      return this;
+    }
 
     public TaskBuilder withColor(Color color) {
       myColor = color;
@@ -241,4 +249,6 @@ public interface TaskManager {
   ProjectEventListener getProjectListener();
 
   GPCalendarListener getCalendarListener();
+
+  FileCollection getFiles();
 }

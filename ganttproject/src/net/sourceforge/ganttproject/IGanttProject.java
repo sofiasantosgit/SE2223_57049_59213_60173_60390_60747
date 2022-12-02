@@ -60,6 +60,7 @@ public interface IGanttProject {
 
   HumanResourceManager getHumanResourceManager();
 
+
   RoleManager getRoleManager();
 
   TaskManager getTaskManager();
