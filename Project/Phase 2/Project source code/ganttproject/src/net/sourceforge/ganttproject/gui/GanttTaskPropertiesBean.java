@@ -404,7 +404,7 @@ public class GanttTaskPropertiesBean extends JPanel {
 
     todoChecks = new ArrayList<>();
     todoPanel = new JPanel(new SpringLayout());
-    myTodoList.list().forEach(t -> addTodoToPanel(t));
+    myTodoList.list().forEach(this::addTodoToPanel);
 
     JScrollPane scrollTodos = new JScrollPane(todoPanel);
     scrollTodos.setBorder(BorderFactory.createEmptyBorder());
