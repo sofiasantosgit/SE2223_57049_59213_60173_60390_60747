@@ -286,8 +286,10 @@ public class GanttTaskPropertiesBean extends JPanel {
         // add Task
         String todoName = nameFieldTodo.getText();
         if (todoName != null) {
-          Todo t = originalTodoList.add(todoName);
-          addTodoToPanel(t);
+          if(!todoName.equals("")) {
+            Todo t = originalTodoList.add(todoName);
+            addTodoToPanel(t);
+          }
         }
         nameFieldTodo.setText(null);
       }
