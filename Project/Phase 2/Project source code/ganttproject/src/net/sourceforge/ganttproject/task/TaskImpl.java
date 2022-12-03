@@ -44,6 +44,8 @@ import net.sourceforge.ganttproject.task.dependency.TaskDependencySliceAsDependa
 import net.sourceforge.ganttproject.task.dependency.TaskDependencySliceAsDependee;
 import net.sourceforge.ganttproject.task.dependency.TaskDependencySliceImpl;
 import net.sourceforge.ganttproject.task.hierarchy.TaskHierarchyItem;
+import net.sourceforge.ganttproject.task.todo.TodoList;
+import net.sourceforge.ganttproject.task.todo.myTodoList;
 import net.sourceforge.ganttproject.util.collect.Pair;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -133,6 +135,7 @@ public class TaskImpl implements Task {
   private final CostImpl myCost = new CostImpl();
 
   private boolean isUnplugged = false;
+  private TodoList myTodoList;
 
   public final static int NONE = 0;
 
@@ -156,7 +159,7 @@ public class TaskImpl implements Task {
     myNotes = "";
     bExpand = true;
     myColor = null;
-
+    myTodoList = new myTodoList();
     customValues = new CustomColumnsValues(myManager.getCustomPropertyManager());
   }
 
@@ -504,6 +507,10 @@ public class TaskImpl implements Task {
       result[i] = nestedItems[i].getTask();
     }
     return result;
+  }
+
+  public TodoList getTodoList() {
+    return myTodoList;
   }
 
   @Override
@@ -1302,4 +1309,5 @@ public class TaskImpl implements Task {
   public Cost getCost() {
     return myCost;
   }
+
 }
