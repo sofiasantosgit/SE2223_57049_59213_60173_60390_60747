@@ -152,6 +152,8 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private ShapePaint originalShape;
 
+  private TodoList originalTodoList;
+
   private final TaskScheduleDatesPanel myTaskScheduleDates;
 
   private CustomColumnsPanel myCustomColumnPanel = null;
@@ -171,7 +173,6 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private JCheckBox myShowInTimeline;
   private AbstractAction myOnEarliestBeginToggle;
-  private final TodoList myTodoList = TodoList.getInstance();
   private ArrayList<Pair<String, JPanel>> todoChecks;
   private JPanel thirdRowPanelTodos;
 
@@ -301,7 +302,7 @@ public class GanttTaskPropertiesBean extends JPanel {
         // add Task
         String todoName = nameFieldTodo.getText();
         if (todoName != null) {
-          Todo t = myTodoList.add(todoName);
+          Todo t = originalTodoList.add(todoName);
           addTodoToPanel(t);
         }
         nameFieldTodo.setText(null);
@@ -404,7 +405,7 @@ public class GanttTaskPropertiesBean extends JPanel {
 
     todoChecks = new ArrayList<>();
     todoPanel = new JPanel(new SpringLayout());
-    myTodoList.list().forEach(this::addTodoToPanel);
+    originalTodoList.list().forEach(this::addTodoToPanel);
 
     JScrollPane scrollTodos = new JScrollPane(todoPanel);
     scrollTodos.setBorder(BorderFactory.createEmptyBorder());
@@ -441,7 +442,7 @@ public class GanttTaskPropertiesBean extends JPanel {
         thirdRowPanelTodos.paintComponents(thirdRowPanelTodos.getGraphics());
 
         todoChecks.remove(todo);
-        myTodoList.remove(id);
+        originalTodoList.remove(id);
       }
     });
     todoChecks.add(Pair.create(IDname, todoBox));
@@ -572,9 +573,9 @@ public class GanttTaskPropertiesBean extends JPanel {
       JCheckBox check = (JCheckBox)box.getComponents()[1];
 
       if (check.isSelected()) {
-        myTodoList.markDone(check.getName());
+        originalTodoList.markDone(check.getName());
       } else {
-        myTodoList.markUndone(check.getName());
+        originalTodoList.markUndone(check.getName());
       }
     }
 
@@ -687,9 +688,8 @@ public class GanttTaskPropertiesBean extends JPanel {
   }
 
   private TodoList getTodoList() {
-    return myTodoList;
+    return originalTodoList;
   }
-
 
 
   private void setThird(GanttCalendar third) {
@@ -710,6 +710,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     originalEarliestBeginDate = task.getThird();
     originalEarliestBeginEnabled = task.getThirdDateConstraint();
     originalIsProjectTask = task.isProjectTask();
+    originalTodoList = task.getTodoList();
   }
 
   private boolean canBeProjectTask(Task testedTask, TaskContainmentHierarchyFacade taskHierarchy) {
