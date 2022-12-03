@@ -344,7 +344,6 @@ public class TaskManagerImpl implements TaskManager {
     return new TaskBuilder() {
       @Override
       public Task build() {
-        System.out.println("HERE TASK BUILDER");
         if (myId == null || myTaskMap.getTask(myId) != null) {
           myId = getAndIncrementId();
         }

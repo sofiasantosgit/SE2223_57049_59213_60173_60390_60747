@@ -191,5 +191,4 @@ public interface Task extends MutableTask {
 
   List<Document> getAttachments();
   FileCollection getFiles();
-  void addFile(FileImpl fileImpl);
 }

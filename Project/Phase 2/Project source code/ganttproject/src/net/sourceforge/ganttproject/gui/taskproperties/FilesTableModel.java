@@ -46,7 +46,7 @@ public class FilesTableModel extends AbstractTableModel {
   private static final boolean EDITABLE = true;
   private static final boolean NOT_EDITABLE = false;
 
-  private final List<File> myFiles;
+  private final FileCollection myFiles;
 
   public void delete(int[] selectedRows) {
     List<File> selected = new ArrayList<File>();
@@ -85,9 +85,7 @@ public class FilesTableModel extends AbstractTableModel {
   }
 
   public FilesTableModel(FileCollection fileColection) {
-
-    myFiles = new ArrayList<File>((fileColection.getFiles()));
-
+    myFiles = fileColection;
   }
 
   @Override
@@ -155,7 +153,7 @@ public class FilesTableModel extends AbstractTableModel {
   }
 
   public void addFile(File file) {
-    myFiles.add(file);
+    myFiles.addFile(file);
     fireTableDataChanged();
   }
 }

@@ -80,7 +80,6 @@ public class TaskFilesPanel {
           File file = fileChooser.getSelectedFile();
           FileImpl fileImpl = new FileImpl(file.getName(), file.getAbsolutePath());
           myModel.addFile(fileImpl);
-          task.addFile(fileImpl);
         }
 
       }

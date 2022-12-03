@@ -30,6 +30,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,6 +112,23 @@ public abstract class AbstractTableAndActionsComponent<T> {
     addAction(action, 0);
   }
 
+  public void openFile(Action action){
+        myTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                  int selectedRow = myTable.getSelectedRow();
+                  try {
+                    Desktop.getDesktop().open(new File((String) myTable.getValueAt(selectedRow, 3)));
+                  } catch (IOException e1) {
+                    e1.printStackTrace();
+                  }
+                }
+                }
+            });
+    }
+
+
+
   private void addAction(Action action, int flags) {
     if (action.getValue(PROPERTY_IS_ENABLED_FUNCTION) == null) {
       action.putValue(PROPERTY_IS_ENABLED_FUNCTION, createIsEnabledFunction(flags));
@@ -119,6 +139,8 @@ public abstract class AbstractTableAndActionsComponent<T> {
       addSelectionListener((SelectionListener<T>) action);
     }
   }
+
+
 
   public void setActionOrientation(int orientation) {
     assert orientation == SwingConstants.VERTICAL || orientation == SwingConstants.HORIZONTAL;

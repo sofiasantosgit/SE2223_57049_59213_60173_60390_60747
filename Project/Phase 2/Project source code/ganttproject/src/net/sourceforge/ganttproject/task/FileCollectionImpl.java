@@ -18,11 +18,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 package net.sourceforge.ganttproject.task;
 
-import net.sourceforge.ganttproject.resource.HumanResource;
-
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+/**
+ * @author Pedro Grilo
+ * @author Guilherme Nisa
+ */
 
 public class FileCollectionImpl implements FileCollection {
 
@@ -36,15 +40,30 @@ public class FileCollectionImpl implements FileCollection {
 
   @Override
   public void addFile(File file) {
-
     files.put(file.getFileName(), file);
-
   }
 
   @Override
   public void deleteFile(File file) {
-
     files.remove(file.getFileName());
+  }
 
+  @Override
+  public int size() {
+    return files.size();
+  }
+
+  @Override
+  public File get(int index) {
+    Object firstKey = files.keySet().toArray()[index];
+    System.out.println("file: "+firstKey);
+    return files.get(firstKey);
+  }
+
+  @Override
+  public void removeAll(List<File> selected) {
+    for (File file : selected) {
+      files.remove(file.getFileName());
+    }
   }
 }

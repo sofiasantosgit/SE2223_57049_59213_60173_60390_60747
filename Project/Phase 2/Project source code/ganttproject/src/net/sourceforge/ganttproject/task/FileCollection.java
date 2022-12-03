@@ -18,10 +18,8 @@ along with GanttProject.  If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sourceforge.ganttproject.task;
 
-import net.sourceforge.ganttproject.resource.HumanResource;
-
 import java.util.Collection;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author Pedro Grilo
@@ -34,6 +32,12 @@ public interface FileCollection {
   void addFile(File file);
 
   void deleteFile(File file);
+
+  int size();
+
+  File get(int index);
+
+  void removeAll(List<File> selected);
 }
 
 

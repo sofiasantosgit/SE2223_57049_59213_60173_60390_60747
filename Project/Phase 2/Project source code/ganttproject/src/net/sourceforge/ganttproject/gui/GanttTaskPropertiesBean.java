@@ -159,7 +159,6 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private final HumanResourceManager myHumanResourceManager;
 
-  private FileCollection myFileCollection;
 
   private final RoleManager myRoleManager;
 

@@ -152,6 +152,7 @@ public class TaskImpl implements Task {
     myDependencySliceAsDependee = new TaskDependencySliceAsDependee(this, myManager.getDependencyCollection());
     myPriority = DEFAULT_PRIORITY;
     myTaskHierarchyItem = myManager.getHierarchyManager().createItem(this);
+    myFileCollection = new FileCollectionImpl();
     myNotes = "";
     bExpand = true;
     myColor = null;
@@ -254,22 +255,9 @@ public class TaskImpl implements Task {
 
   @Override
   public FileCollection getFiles() {
-    System.out.println("here get files");
-    if(myFileCollection == null) {
-      System.out.println("null ?? ");
-      myFileCollection = new FileCollectionImpl();
-    }
     return myFileCollection;
   }
 
-  @Override
-  public void addFile(FileImpl fileImpl) {
-    System.out.println("here add file");
-    if(myFileCollection == null) {
-      myFileCollection = new FileCollectionImpl();
-    }
-    myFileCollection.addFile(fileImpl);
-  }
 
 
   public String getWebLink() {
