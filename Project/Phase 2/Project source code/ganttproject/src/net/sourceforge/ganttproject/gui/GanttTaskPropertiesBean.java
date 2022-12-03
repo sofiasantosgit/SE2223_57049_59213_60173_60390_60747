@@ -54,9 +54,7 @@ import org.jdesktop.swingx.JXHyperlink;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Real panel for editing task properties
@@ -128,8 +126,7 @@ public class GanttTaskPropertiesBean extends JPanel {
   private JTextArea noteAreaNotes;
 
   private JPanel secondRowPanelNotes;
-
-  private JPanel thirdRowPanelTodo;
+  private JPanel todoPanel;
 
   private String originalName;
 
@@ -175,7 +172,8 @@ public class GanttTaskPropertiesBean extends JPanel {
   private JCheckBox myShowInTimeline;
   private AbstractAction myOnEarliestBeginToggle;
   private final TodoList myTodoList = TodoList.getInstance();
-  private ArrayList<Box> todoChecks;
+  private ArrayList<Pair<String, JPanel>> todoChecks;
+  private JPanel thirdRowPanelTodos;
 
   public GanttTaskPropertiesBean(GanttTask[] selectedTasks, IGanttProject project, UIFacade uifacade) {
     myTaskScheduleDates = new TaskScheduleDatesPanel(uifacade);
@@ -295,7 +293,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     todoBox.add(nameFieldTodo);
     todoBox.add(Box.createHorizontalStrut(2));
     JButton bTodo = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/8x8/add.png")));
-    bTodo.setToolTipText(GanttProject.getToolTip(language.getText("addTodo")));
+    bTodo.setToolTipText(GanttProject.getToolTip("Add To-Do"));
     todoBox.add(bTodo);
     bTodo.addActionListener(new ActionListener() {
       @Override
@@ -303,14 +301,14 @@ public class GanttTaskPropertiesBean extends JPanel {
         // add Task
         String todoName = nameFieldTodo.getText();
         if (todoName != null) {
-          int id = myTodoList.add(todoName);
-          addTodoToPanel(id);
+          Todo t = myTodoList.add(todoName);
+          addTodoToPanel(t);
         }
         nameFieldTodo.setText(null);
       }
     });
 
-    propertiesPanel.add(new JLabel(language.getText("addTodo")));
+    propertiesPanel.add(new JLabel("Add To-Do"));
     propertiesPanel.add(todoBox);
 
 
@@ -322,8 +320,10 @@ public class GanttTaskPropertiesBean extends JPanel {
     generalPanel.add(propertiesWrapper);
 
     JPanel sideWrapper = new JPanel(new BorderLayout());
-    sideWrapper.add(thirdRowPanelTodo, BorderLayout.NORTH);
-    sideWrapper.add(notesPanel, BorderLayout.SOUTH);
+    sideWrapper.add(notesPanel, BorderLayout.NORTH);
+    sideWrapper.add(thirdRowPanelTodos, BorderLayout.CENTER);
+    SpringUtilities.makeCompactGrid(sideWrapper, 2, 1, 1, 1, 5, 5);
+
 
     generalPanel.add(sideWrapper);
     SpringUtilities.makeCompactGrid(generalPanel, 1, 2, 1, 1, 10, 5);
@@ -399,27 +399,27 @@ public class GanttTaskPropertiesBean extends JPanel {
   }
 
   private void constructTodoPanel() {
-    thirdRowPanelTodo = new JPanel(new SpringLayout());
-    UIUtil.createTitle(thirdRowPanelTodo, language.getText("todo"));
+    thirdRowPanelTodos = new JPanel(new BorderLayout());
+    UIUtil.createTitle(thirdRowPanelTodos, "To-Do");
 
     todoChecks = new ArrayList<>();
-    for (int i = 0; i < myTodoList.size(); i++) {
-      addTodoToPanel(i);
-    }
+    todoPanel = new JPanel(new SpringLayout());
+    myTodoList.list().forEach(t -> addTodoToPanel(t));
+
+    JScrollPane scrollTodos = new JScrollPane(todoPanel);
+    scrollTodos.setBorder(BorderFactory.createEmptyBorder());
+    thirdRowPanelTodos.add(scrollTodos, BorderLayout.CENTER);
   }
 
-  private void addTodoToPanel(int todoID) {
-    Todo t = myTodoList.get(todoID);
-    String IDname = String.valueOf(todoID);
+  private void addTodoToPanel(Todo t) {
+    String IDname = String.valueOf(t.getID());
 
-    Box todoBox = Box.createHorizontalBox();
+    JPanel todoBox = new JPanel(new SpringLayout());
     todoBox.add(new JLabel(t.getDescription()));
-    todoBox.add(Box.createHorizontalStrut(2));
     JCheckBox check = new JCheckBox();
     check.setSelected(t.isDone());
     check.setName(IDname);
     todoBox.add(check);
-    todoBox.add(Box.createHorizontalStrut(4));
     JButton bDelete = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/8x8/remove.png")));
     bDelete.setToolTipText(GanttProject.getToolTip("Delete To-Do"));
     bDelete.setName(IDname);
@@ -428,18 +428,27 @@ public class GanttTaskPropertiesBean extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         JButton b = (JButton)e.getSource();
-        int i = Integer.parseInt(b.getName());
-        thirdRowPanelTodo.remove(todoChecks.get(i));
-        todoChecks.remove(i);
-        myTodoList.remove(i);
-        SpringUtilities.makeCompactGrid(thirdRowPanelTodo, thirdRowPanelTodo.getComponentCount(), 1, 1, 1, 5, 5);
-        thirdRowPanelTodo.repaint();
+        String id = b.getName();
+
+        Pair<String, JPanel> todo = todoChecks.stream()
+                .filter(box -> id.equals(box.first()))
+                .findAny()
+                .orElse(null);
+
+        JPanel panel = todo.second();
+        todoPanel.remove(panel);
+        SpringUtilities.makeCompactGrid(todoPanel, todoPanel.getComponentCount(), 1, 1, 1, 5, 5);
+        thirdRowPanelTodos.paintComponents(thirdRowPanelTodos.getGraphics());
+
+        todoChecks.remove(todo);
+        myTodoList.remove(id);
       }
     });
-    todoChecks.add(todoBox);
-    thirdRowPanelTodo.add(todoBox);
+    todoChecks.add(Pair.create(IDname, todoBox));
+    SpringUtilities.makeCompactGrid(todoBox, 1, 3, 1, 1, 5, 5);
 
-    SpringUtilities.makeCompactGrid(thirdRowPanelTodo, thirdRowPanelTodo.getComponentCount(), 1, 1, 1, 5, 5);
+    todoPanel.add(todoBox);
+    SpringUtilities.makeCompactGrid(todoPanel, todoPanel.getComponentCount(), 1, 1, 1, 5, 5);
   }
 
 
@@ -558,14 +567,14 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private void verifyTodos() {
 
-    for (Box box: todoChecks) {
-      JCheckBox check = (JCheckBox)box.getComponents()[2];
-      int i = Integer.parseInt(check.getName());
+    for (Pair<String, JPanel> panel: todoChecks) {
+      JPanel box = panel.second();
+      JCheckBox check = (JCheckBox)box.getComponents()[1];
 
       if (check.isSelected()) {
-        myTodoList.markDone(i);
+        myTodoList.markDone(check.getName());
       } else {
-        myTodoList.markUndone(i);
+        myTodoList.markUndone(check.getName());
       }
     }
 

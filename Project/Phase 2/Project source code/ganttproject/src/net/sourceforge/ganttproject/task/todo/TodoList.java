@@ -1,6 +1,5 @@
 package net.sourceforge.ganttproject.task.todo;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TodoList {
     private static TodoList single_list = null;
@@ -8,24 +7,31 @@ public class TodoList {
     private TodoList(){
         list = new ArrayList<>();
     }
-    public int add(String name){
-        list.add(new Todo(name));
-        return list.size()-1;
+    public Todo add(String name){
+        Todo t = new Todo(name);
+        list.add(t);
+        return t;
     }
-    public Todo get(int i) {
-        return list.get(i);
+    public Todo get(String id) {
+        return list.stream()
+                .filter(todo -> id.equals(todo.getID()))
+                .findAny()
+                .orElse(null);
     }
-    public void markDone(int i) {
-        list.get(i).done();
+    public void markDone(String i) {
+        this.get(i).done();
     }
-    public void markUndone(int i) {
-        list.get(i).undone();
+    public void markUndone(String i) {
+        this.get(i).undone();
     }
     public int size() {
         return list.size();
     }
-    public void remove(int i) {
-        list.remove(i);
+    public ArrayList<Todo> list() {
+        return list;
+    }
+    public void remove(String id) {
+        list.remove(this.get(id));
     }
     public static TodoList getInstance() {
         if (single_list == null)
