@@ -18,31 +18,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 package net.sourceforge.ganttproject.task;
 
-import net.sourceforge.ganttproject.resource.HumanResource;
-import net.sourceforge.ganttproject.resource.HumanResourceManager;
-import net.sourceforge.ganttproject.roles.Role;
-
-import java.util.*;
-
 public class FileImpl implements File {
 
-  String fileName;
-  String url;
+    String fileName;
+    String url;
 
-  public FileImpl(String fileName, String url){
+    public FileImpl(String fileName, String url) {
 
-      this.fileName = fileName;
-      this.url = url;
+        this.fileName = fileName;
+        this.url = url;
 
-  }
+    }
 
-  @Override
-  public String getFileName() {
-    return fileName;
-  }
+    @Override
+    public String getFileName() {
+        return fileName;
+    }
 
-  @Override
-  public String getURL() {
-    return url;
-  }
+    @Override
+    public String getURL() {
+        return url;
+    }
 }

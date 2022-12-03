@@ -30,40 +30,40 @@ import java.util.Map;
 
 public class FileCollectionImpl implements FileCollection {
 
-  private final Map<String, File> files = new HashMap<>();
+    private final Map<String, File> files = new HashMap<>();
 
 
-  @Override
-  public Collection<File> getFiles() {
-    return files.values();
-  }
-
-  @Override
-  public void addFile(File file) {
-    files.put(file.getFileName(), file);
-  }
-
-  @Override
-  public void deleteFile(File file) {
-    files.remove(file.getFileName());
-  }
-
-  @Override
-  public int size() {
-    return files.size();
-  }
-
-  @Override
-  public File get(int index) {
-    Object firstKey = files.keySet().toArray()[index];
-    System.out.println("file: "+firstKey);
-    return files.get(firstKey);
-  }
-
-  @Override
-  public void removeAll(List<File> selected) {
-    for (File file : selected) {
-      files.remove(file.getFileName());
+    @Override
+    public Collection<File> getFiles() {
+        return files.values();
     }
-  }
+
+    @Override
+    public void addFile(File file) {
+        files.put(file.getFileName(), file);
+    }
+
+    @Override
+    public void deleteFile(File file) {
+        files.remove(file.getFileName());
+    }
+
+    @Override
+    public int size() {
+        return files.size();
+    }
+
+    @Override
+    public File get(int index) {
+        Object firstKey = files.keySet().toArray()[index];
+        System.out.println("file: " + firstKey);
+        return files.get(firstKey);
+    }
+
+    @Override
+    public void removeAll(List<File> selected) {
+        for (File file : selected) {
+            files.remove(file.getFileName());
+        }
+    }
 }

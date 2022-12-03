@@ -20,88 +20,94 @@ package net.sourceforge.ganttproject.gui.taskproperties;
 
 import net.sourceforge.ganttproject.gui.AbstractTableAndActionsComponent;
 import net.sourceforge.ganttproject.gui.UIUtil;
+import net.sourceforge.ganttproject.task.File;
 import net.sourceforge.ganttproject.task.FileCollection;
 import net.sourceforge.ganttproject.task.FileImpl;
 import net.sourceforge.ganttproject.task.Task;
-import net.sourceforge.ganttproject.task.TaskManager;
-import net.sourceforge.ganttproject.task.dependency.TaskDependency;
-import net.sourceforge.ganttproject.task.dependency.TaskDependencyConstraint;
-import net.sourceforge.ganttproject.task.dependency.constraint.FinishFinishConstraintImpl;
-import net.sourceforge.ganttproject.task.dependency.constraint.FinishStartConstraintImpl;
-import net.sourceforge.ganttproject.task.dependency.constraint.StartFinishConstraintImpl;
-import net.sourceforge.ganttproject.task.dependency.constraint.StartStartConstraintImpl;
-import org.jdesktop.swingx.JXLabel;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.List;
+import java.awt.event.MouseAdapter;
+import java.io.IOException;
 
 /**
  * UI component in a task files dialog: a table with task predecessors
  *
- * @author  Pedro Grilo
+ * @author Pedro Grilo
  * @author Guilherme Fernandes
  */
 public class TaskFilesPanel {
-  private FileCollection myFileCollection;
-  private FilesTableModel myModel;
-  private JTable myTable;
-  private JFileChooser fileChooser = new JFileChooser();
+    private FileCollection myFileCollection;
+    private FilesTableModel myModel;
+    private JTable myTable;
+    private final JFileChooser fileChooser = new JFileChooser();
 
-  private Task task;
+    private final Task task;
 
-  public TaskFilesPanel(Task task, FileCollection fileCollection){
-    myFileCollection = fileCollection;
-    this.task = task;
-  }
+    public TaskFilesPanel(Task task, FileCollection fileCollection) {
+        myFileCollection = fileCollection;
+        this.task = task;
+    }
 
-  private JTable getTable() {
-    return myTable;
-  }
+    private JTable getTable() {
+        return myTable;
+    }
 
-  public JPanel getComponent() {
-    myModel = new FilesTableModel(myFileCollection);
-    myTable = new JTable(myModel);
-    UIUtil.setupTableUI(myTable);
-    UIUtil.setupTableUI(getTable());
+    public JPanel getComponent() {
+        myModel = new FilesTableModel(myFileCollection);
+        myTable = new JTable(myModel);
+        UIUtil.setupTableUI(myTable);
+        UIUtil.setupTableUI(getTable());
 
-    AbstractTableAndActionsComponent<TaskDependency> tableAndActions = new AbstractTableAndActionsComponent<TaskDependency>(
-        getTable()) {
-      @Override
-      protected void onAddEvent() {
+        AbstractTableAndActionsComponent<File> tableAndActions = new AbstractTableAndActionsComponent<File>(
+                getTable()) {
+            @Override
+            protected void onAddEvent() {
 
-        System.out.println("Add file");
-        int returnVal = fileChooser.showSaveDialog(null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-          File file = fileChooser.getSelectedFile();
-          FileImpl fileImpl = new FileImpl(file.getName(), file.getAbsolutePath());
-          myModel.addFile(fileImpl);
-        }
+                System.out.println("Add file");
+                int returnVal = fileChooser.showSaveDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    java.io.File file = fileChooser.getSelectedFile();
+                    FileImpl fileImpl = new FileImpl(file.getName(), file.getAbsolutePath());
+                    myModel.addFile(fileImpl);
+                }
 
-      }
+            }
 
-      @Override
-      protected void onDeleteEvent() {
-        if (myTable.isEditing()) {
-          myTable.getCellEditor().stopCellEditing();
-        }
-        myModel.delete(getTable().getSelectedRows());
-      }
-    };
+            @Override
+            protected void onDeleteEvent() {
+                if (myTable.isEditing()) {
+                    myTable.getCellEditor().stopCellEditing();
+                }
+                System.out.println("Delete file");
+                System.out.println(myTable.getSelectedRow());
+                myModel.delete(getTable().getSelectedRows());
+            }
 
-    return CommonPanel.createTableAndActions(myTable, tableAndActions.getActionsComponent());
-  }
+            @Override
+            protected File getValue(int row) {
+                File file = myFileCollection.get(row);
+                myTable.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent e) {
+                        if (e.getClickCount() == 2) {
+                            int selectedRow = myTable.getSelectedRow();
+                            try {
+                                Desktop.getDesktop().open(new java.io.File((String) myTable.getValueAt(selectedRow, 1)));
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    }
+                });
+                return file;
+            }
+        };
 
-  public void init(FileCollection fileCollection) {
-    myFileCollection = fileCollection;
-  }
+        return CommonPanel.createTableAndActions(myTable, tableAndActions.getActionsComponent());
+    }
 
-  private FileCollection getFiles() {
-    return myFileCollection;
-  }
+    public void init(FileCollection fileCollection) {
+        myFileCollection = fileCollection;
+    }
 
 }

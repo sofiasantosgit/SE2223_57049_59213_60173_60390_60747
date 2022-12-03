@@ -27,17 +27,17 @@ import java.util.List;
  */
 public interface FileCollection {
 
-  Collection<File> getFiles();
+    Collection<File> getFiles();
 
-  void addFile(File file);
+    void addFile(File file);
 
-  void deleteFile(File file);
+    void deleteFile(File file);
 
-  int size();
+    int size();
 
-  File get(int index);
+    File get(int index);
 
-  void removeAll(List<File> selected);
+    void removeAll(List<File> selected);
 }
 
 
