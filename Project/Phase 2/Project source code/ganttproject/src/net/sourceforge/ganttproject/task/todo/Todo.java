@@ -2,6 +2,11 @@ package net.sourceforge.ganttproject.task.todo;
 
 import java.util.UUID;
 
+/**
+ * @author Cláudia Santos
+ * @author Tomás Mondim
+ * @author Rui Correia
+ */
 public class Todo {
     private final String ID;
     private String description;

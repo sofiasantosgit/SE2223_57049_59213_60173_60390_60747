@@ -45,6 +45,7 @@ import net.sourceforge.ganttproject.task.dependency.TaskDependencySliceAsDepende
 import net.sourceforge.ganttproject.task.dependency.TaskDependencySliceImpl;
 import net.sourceforge.ganttproject.task.hierarchy.TaskHierarchyItem;
 import net.sourceforge.ganttproject.task.todo.TodoList;
+import net.sourceforge.ganttproject.task.todo.myTodoList;
 import net.sourceforge.ganttproject.util.collect.Pair;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -155,7 +156,7 @@ public class TaskImpl implements Task {
     myNotes = "";
     bExpand = true;
     myColor = null;
-    myTodoList = new TodoList();
+    myTodoList = new myTodoList();
     customValues = new CustomColumnsValues(myManager.getCustomPropertyManager());
   }
 

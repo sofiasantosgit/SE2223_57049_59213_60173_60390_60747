@@ -100,8 +100,6 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private JTextField tfWebLink;
 
-  private JTextField tfFile;
-
   private JButton bWebLink;
 
   private JButton bFile;
