@@ -38,6 +38,8 @@ import net.sourceforge.ganttproject.resource.HumanResourceManager;
 import net.sourceforge.ganttproject.roles.RoleManager;
 import net.sourceforge.ganttproject.shape.JPaintCombo;
 import net.sourceforge.ganttproject.task.*;
+import net.sourceforge.ganttproject.task.todo.Todo;
+import net.sourceforge.ganttproject.task.todo.TodoList;
 import net.sourceforge.ganttproject.util.BrowserControl;
 import net.sourceforge.ganttproject.util.collect.Pair;
 import org.jdesktop.swingx.JXDatePicker;
