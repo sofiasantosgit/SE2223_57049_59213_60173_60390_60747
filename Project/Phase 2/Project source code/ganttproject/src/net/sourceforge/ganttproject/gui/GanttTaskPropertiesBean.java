@@ -45,10 +45,10 @@ import org.jdesktop.swingx.JXHyperlink;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Real panel for editing task properties
@@ -74,7 +74,7 @@ public class GanttTaskPropertiesBean extends JPanel {
   private GanttCalendar myThird;
 
   private JTabbedPane tabbedPane; // TabbedPane that includes the following four
-                                  // items
+  // items
 
   private JPanel generalPanel;
 
@@ -88,6 +88,8 @@ public class GanttTaskPropertiesBean extends JPanel {
   private JPanel notesPanel;
 
   private JTextField nameField1;
+
+  private JTextField nameFieldTodo;
 
   private JTextField tfWebLink;
 
@@ -117,6 +119,8 @@ public class GanttTaskPropertiesBean extends JPanel {
   private JTextArea noteAreaNotes;
 
   private JPanel secondRowPanelNotes;
+
+  private JPanel thirdRowPanelTodo;
 
   private String originalName;
 
@@ -165,6 +169,8 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private JCheckBox myShowInTimeline;
   private AbstractAction myOnEarliestBeginToggle;
+  private final TodoList myTodoList = TodoList.getInstance();
+  private ArrayList<Box> todoChecks;
 
   public GanttTaskPropertiesBean(GanttTask[] selectedTasks, IGanttProject project, UIFacade uifacade) {
     myTaskScheduleDates = new TaskScheduleDatesPanel(uifacade);
@@ -265,7 +271,7 @@ public class GanttTaskPropertiesBean extends JPanel {
         // link to open the web link
         if (!BrowserControl.displayURL(tfWebLink.getText())) {
           GanttDialogInfo gdi = new GanttDialogInfo(null, GanttDialogInfo.ERROR, GanttDialogInfo.YES_OPTION,
-              language.getText("msg4"), language.getText("error"));
+                  language.getText("msg4"), language.getText("error"));
           gdi.setVisible(true);
         }
       }
@@ -273,14 +279,44 @@ public class GanttTaskPropertiesBean extends JPanel {
     propertiesPanel.add(new JLabel(language.getText("webLink")));
     propertiesPanel.add(weblinkBox);
 
+
+
+    Box todoBox = Box.createHorizontalBox();
+    nameFieldTodo = new JTextField(20);
+    todoBox.add(nameFieldTodo);
+    todoBox.add(Box.createHorizontalStrut(2));
+    JButton bTodo = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/8x8/add.png")));
+    bTodo.setToolTipText(GanttProject.getToolTip(language.getText("addTodo")));
+    todoBox.add(bTodo);
+    bTodo.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // add Task
+        String todoName = nameFieldTodo.getText();
+        if (todoName != null) {
+          int id = myTodoList.add(todoName);
+          addTodoToPanel(id);
+        }
+        nameFieldTodo.setText(null);
+      }
+    });
+
+    propertiesPanel.add(new JLabel(language.getText("addTodo")));
+    propertiesPanel.add(todoBox);
+
+
     SpringUtilities.makeCompactGrid(propertiesPanel, propertiesPanel.getComponentCount() / 2, 2, 1, 1, 5, 5);
 
     JPanel propertiesWrapper = new JPanel(new BorderLayout());
     propertiesWrapper.add(propertiesPanel, BorderLayout.NORTH);
     generalPanel = new JPanel(new SpringLayout());
-    //generalPanel.add(new JLayer<JPanel>(propertiesPanel, layerUi));
     generalPanel.add(propertiesWrapper);
-    generalPanel.add(notesPanel);
+
+    JPanel sideWrapper = new JPanel(new BorderLayout());
+    sideWrapper.add(thirdRowPanelTodo, BorderLayout.NORTH);
+    sideWrapper.add(notesPanel, BorderLayout.SOUTH);
+
+    generalPanel.add(sideWrapper);
     SpringUtilities.makeCompactGrid(generalPanel, 1, 2, 1, 1, 10, 5);
   }
 
@@ -322,7 +358,7 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private void constructCustomColumnPanel() {
     myCustomColumnPanel = new CustomColumnsPanel(myProject.getTaskCustomColumnManager(), myUIfacade,
-        selectedTasks[0].getCustomValues(), myUIfacade.getTaskTree().getVisibleFields());
+            selectedTasks[0].getCustomValues(), myUIfacade.getTaskTree().getVisibleFields());
   }
 
   /** Construct the predecessors tabbed pane */
@@ -353,9 +389,56 @@ public class GanttTaskPropertiesBean extends JPanel {
     notesPanel = secondRowPanelNotes;
   }
 
+  private void constructTodoPanel() {
+    thirdRowPanelTodo = new JPanel(new SpringLayout());
+    UIUtil.createTitle(thirdRowPanelTodo, language.getText("todo"));
+
+    todoChecks = new ArrayList<>();
+    for (int i = 0; i < myTodoList.size(); i++) {
+      addTodoToPanel(i);
+    }
+  }
+
+  private void addTodoToPanel(int todoID) {
+    Todo t = myTodoList.get(todoID);
+    String IDname = String.valueOf(todoID);
+
+    Box todoBox = Box.createHorizontalBox();
+    todoBox.add(new JLabel(t.getDescription()));
+    todoBox.add(Box.createHorizontalStrut(2));
+    JCheckBox check = new JCheckBox();
+    check.setSelected(t.isDone());
+    check.setName(IDname);
+    todoBox.add(check);
+    todoBox.add(Box.createHorizontalStrut(4));
+    JButton bDelete = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/8x8/remove.png")));
+    bDelete.setToolTipText(GanttProject.getToolTip("Delete To-Do"));
+    bDelete.setName(IDname);
+    todoBox.add(bDelete);
+    bDelete.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        JButton b = (JButton)e.getSource();
+        int i = Integer.parseInt(b.getName());
+        thirdRowPanelTodo.remove(todoChecks.get(i));
+        todoChecks.remove(i);
+        myTodoList.remove(i);
+        SpringUtilities.makeCompactGrid(thirdRowPanelTodo, thirdRowPanelTodo.getComponentCount(), 1, 1, 1, 5, 5);
+        thirdRowPanelTodo.repaint();
+      }
+    });
+    todoChecks.add(todoBox);
+    thirdRowPanelTodo.add(todoBox);
+
+    SpringUtilities.makeCompactGrid(thirdRowPanelTodo, thirdRowPanelTodo.getComponentCount(), 1, 1, 1, 5, 5);
+  }
+
+
+
   /** Initialize the widgets */
   private void init() {
     constructNotesPanel();
+    constructTodoPanel();
 
     tabbedPane = new JTabbedPane() {
       @Override
@@ -365,7 +448,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     };
     constructGeneralPanel();
     tabbedPane.addTab(language.getText("general"), new ImageIcon(getClass().getResource("/icons/properties_16.gif")),
-        generalPanel);
+            generalPanel);
 
     constructFilePanel();
     tabbedPane.addTab(language.getText("fileChooser.fileList"), new ImageIcon(getClass().getResource("/icons/link_16.gif")),
@@ -373,12 +456,12 @@ public class GanttTaskPropertiesBean extends JPanel {
 
     constructPredecessorsPanel();
     tabbedPane.addTab(language.getText("predecessors"), new ImageIcon(getClass().getResource("/icons/relashion.gif")),
-        predecessorsPanel);
+            predecessorsPanel);
 
     constructResourcesPanel();
 
     tabbedPane.addTab(language.getCorrectedLabel("human"), new ImageIcon(getClass().getResource("/icons/res_16.gif")),
-        resourcesPanel);
+            resourcesPanel);
 
     setLayout(new BorderLayout());
 
@@ -386,7 +469,7 @@ public class GanttTaskPropertiesBean extends JPanel {
 
     constructCustomColumnPanel();
     tabbedPane.addTab(language.getText("customColumns"), new ImageIcon(getClass().getResource("/icons/custom.gif")),
-        myCustomColumnPanel.getComponent());
+            myCustomColumnPanel.getComponent());
     tabbedPane.addFocusListener(new FocusAdapter() {
       private boolean isFirstFocusGain = true;
 
@@ -405,9 +488,6 @@ public class GanttTaskPropertiesBean extends JPanel {
   /** Apply the modified properties to the selected Tasks */
   public void applySettings() {
     for (int i = 0; i < selectedTasks.length; i++) {
-      // TODO The originalXXX values should not be used,
-      // but the original values should be read from each processed task to
-      // determine whether the value has been changed
       TaskMutator mutator = selectedTasks[i].createMutator();
       if (originalName == null || !originalName.equals(getTaskName())) {
         mutator.setName(getTaskName());
@@ -431,8 +511,8 @@ public class GanttTaskPropertiesBean extends JPanel {
         mutator.setEnd(getEnd());
       }
       if (originalEarliestBeginDate == null && getThird() != null || originalEarliestBeginDate != null && getThird() == null
-          || originalEarliestBeginDate != null && !originalEarliestBeginDate.equals(getThird())
-          || originalEarliestBeginEnabled != getThirdDateConstraint()) {
+              || originalEarliestBeginDate != null && !originalEarliestBeginDate.equals(getThird())
+              || originalEarliestBeginEnabled != getThirdDateConstraint()) {
         mutator.setThird(getThird(), getThirdDateConstraint());
       }
 
@@ -450,9 +530,9 @@ public class GanttTaskPropertiesBean extends JPanel {
       }
       mutator.setColor(myTaskColorOption.getValue());
       if (this.originalShape == null && shapeComboBox.getSelectedIndex() != 0 || originalShape != null
-          && !this.originalShape.equals(shapeComboBox.getSelectedPaint())) {
+              && !this.originalShape.equals(shapeComboBox.getSelectedPaint())) {
         mutator.setShape(new ShapePaint((ShapePaint) shapeComboBox.getSelectedPaint(), Color.white,
-            myTaskColorOption.getValue()));
+                myTaskColorOption.getValue()));
       }
 
       mutator.commit();
@@ -465,7 +545,24 @@ public class GanttTaskPropertiesBean extends JPanel {
       } else {
         myUIfacade.getCurrentTaskView().getTimelineTasks().add(selectedTasks[i]);
       }
+
+      verifyTodos();
     }
+  }
+
+  private void verifyTodos() {
+
+    for (Box box: todoChecks) {
+      JCheckBox check = (JCheckBox)box.getComponents()[2];
+      int i = Integer.parseInt(check.getName());
+
+      if (check.isSelected()) {
+        myTodoList.markDone(i);
+      } else {
+        myTodoList.markUndone(i);
+      }
+    }
+
   }
 
   private void setSelectedTaskProperties() {
@@ -572,6 +669,10 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private GanttCalendar getThird() {
     return myThird;
+  }
+
+  private TodoList getTodoList() {
+    return myTodoList;
   }
 
 

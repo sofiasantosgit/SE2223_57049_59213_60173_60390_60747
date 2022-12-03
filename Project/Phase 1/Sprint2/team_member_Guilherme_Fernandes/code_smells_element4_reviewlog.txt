@@ -1,0 +1,21 @@
+Reviewer Name: Rui Correia
+Code Smell: Dead Code
+
+-> Boa identificação do code smell e uma boa sugestão
+-> Podia ter uma melhor apresentação, mas de resto está bom
+
+----------------------------
+
+Reviewer Name: Tomás Mondim
+Code Smell: No comments / Long method
+
+-> Talvez referir que tipo de comentários deveriam ser adicionados.
+-> Para além disto parece bem!
+
+---------------------------
+
+Reviewer Name: Sofia Santos
+Code Smell: Data Clump
+
+-> A classificação do code smell parece estar correta.
+-> Deviam talvez estar mencionados quais métodos iriam para a classe nova, tendo cuidado que esta não se tornasse um Data Class code smell.

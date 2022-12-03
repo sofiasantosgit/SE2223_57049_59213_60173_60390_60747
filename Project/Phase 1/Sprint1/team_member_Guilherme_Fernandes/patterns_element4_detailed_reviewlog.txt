@@ -1,0 +1,20 @@
+Reviewer Name: Tomás Mondim
+Design Pattern: Singleton Pattern
+
+-> Deverias explicar a print 1, passa um pouco despercebido o porque de teres colocado a print.
+->De resto parece me certo!
+
+---------------------
+Reviewer Name: Rui Correia
+Design Pattern: Command pattern
+
+-> Explain how each command is interpreted and executed.
+
+----------------------
+Reviewer Name: Rui Correia
+Design Pattern: Template Method Pattern
+
+-> Should add some more info about the subclasses (maybe some pics or explanation of implementation)
+-> Apart from that looks good to me!
+
+---------------------

@@ -1,0 +1,219 @@
+------------------------------------ Design Patterns ------------------------------------ 
+
+
+Cláudia Santos
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Factory Method Pattern
+
+-> Deverias mostrar um bocado do construtor da class GanttCalendar
+-> De resto parece-me tudo bem, pois tens uma interface LocalApi que é implementada
+nas classes e depois tens o método createGanttCalendar que utiliza o objeto que tem a tua
+interface. Isto tudo dentro de uma classe chamada CalendarFactory.
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Façade Pattern
+
+-> Façade class and interfaces nicely pointed out. Bonus points for the uml diagram!
+-> Looks good to me!
+
+Reviewer Name: Rui Correia
+Design Pattern: Adapter design pattern
+
+-> Maybe show some more classes where the adapter is used.
+-> Other than that it looks fine.
+
+---------------------
+
+Pedro Grilo
+
+Reviewer Name: Tomás Mondim
+Design Pattern: Façade Pattern
+
+-> Parece-me bem, apenas peca de uma explicação sobre o porquê deste ser um Façade Pattern
+-> Falta também a localização das classes
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Proxy design pattern
+
+-> Maybe explain how that interface is used in those classes
+
+Reviewer Name: Cláudia Santos
+Design Pattern: Factory Method Pattern
+
+-> The exact location of the code snippets in the codebase should be provided.
+-> Should show a code snippet of the Factory Method "createIconFactory" and explain that that's the main way to obtain instances of the class FontAwesomeIcon. Hiding the creation of objects is the purpose of this pattern.
+
+---------------------
+
+Rui Correia
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Decorator Method Pattern
+
+-> Parece tudo ótimo, pois mostra a classe abstrata OptionPageProviderBase e identificas todas as classes que utilizam essa abstrata.
+Todas essas classes adicionam funcionalidades ao objeto sem alterar a estrutura, tal como é pedido no Decorator Pattern.
+-> Podia ter prints de snippets de code das classes que utilizam OptionPageProviderBase
+
+Reviewer Name: Tomás Mondim
+Design Pattern: Interpreter Method Pattern
+
+-> Deveria ter uma explicação sobre o porquê desta classe usar o Interpreter Method
+-> De resto está simples e claro!
+
+Reviewer Name: Cláudia Santos
+Design Pattern: Singleton Pattern
+
+-> All code snippets should have a label identifying their exact location on the codebase.
+-> The explanation as for why it's a Singleton is not enough. There should be an explanation about how the "myUIConfig" is this class' uniqueInstance, and that clients access the sole instance of UIConfiguration only using its access point "getUIConfiguration".
+
+---------------------
+
+Guilherme Fernandes
+
+Reviewer Name: Tomás Mondim
+Design Pattern: Singleton Pattern
+
+-> Deverias explicar a print 1, passa um pouco despercebido o porquê de teres colocado a print.
+-> De resto parece me certo!
+
+Reviewer Name: Rui Correia
+Design Pattern: Command pattern
+
+-> Explain how each command is interpreted and executed.
+
+Reviewer Name: Rui Correia
+Design Pattern: Template Method Pattern
+
+-> Should add some more info about the subclasses (maybe some pictures or explanation of implementation)
+-> Apart from that looks good to me!
+
+---------------------
+
+Tomás Mondim
+
+Reviewer Name: Cláudia Santos
+Design Pattern: Decorator Pattern
+
+-> The identification of the Decorator design pattern seems to be correct, with all the class relationships required by this pattern.
+-> There should be some grammar fixes in the report.
+
+Reviewer Name: Pedro Grilo
+Design Pattern: Singleton Design Pattern
+
+-> Está correto, pois garante que o GanttLookAndFeels cria apenas um, usando assim o return do singleton.
+-> Podias mostrar uma print do snippet do code onde é usado
+-> De resto está ótimo
+
+Reviewer Name: Guilherme Fernandes
+Design Pattern: Façade Design Pattern
+
+-> Should explain the complexity hidden behind the façade.
+
+
+------------------------------------ Code Smells ------------------------------------ 
+
+Cláudia Santos
+
+Reviewer Name: Rui Correia
+Code Smell: Switch statement
+
+-> Good find and good suggestion
+
+Reviewer Name: Pedro Grilo
+Code Smell: Dead Code
+
+-> Parece me correto!
+
+Reviewer Name: Guilherme Fernandes
+Code Smell: Long Parameter List
+
+-> Looks good to me!
+
+---------------------
+
+Pedro Grilo
+
+Reviewer Name: Guilherme Fernandes
+Code Smell: Speculative Generality
+
+-> Lacks a suggestion of a different implementation.
+-> Other than that looks good!
+
+Reviewer Name: Tomás Mondim
+Code Smell: Long Parameter List
+
+-> Poderia ser mais específico e conciso na alteração, seja para os parâmetros, seja para os comentários, que apesar de ser óbvio não sugere alteração.
+-> De resto parece me bem!
+
+Reviewer Name: Cláudia Santos
+Code Smell: Dead Code
+
+-> The identification of the code smell seems to be correct, and the suggestion is clear enough.
+
+---------------------
+
+Rui Correia
+
+Reviewer Name: Pedro Grilo
+Code Smell: Duplicated Code
+
+-> Sim, refereste a código duplicado, mas a tua sugestão podia ter que o catch
+podia ter um "OR" como condição e assim também evitava a repetição de código.
+-> De resto está ok!
+
+Reviewer Name: Tomas Mondim
+Code Smell: Long Method without Comments
+-> Falta uma explicação mais detalhada de que tipo de comentários se deveria adicionar.
+-> Falta uma sugestão de alteração para o facto do método ser muito longo
+
+Reviewer Name: Guilherme Fernandes
+Code Smell: Dead Code
+
+-> Should show the rest of the method to check if the commented code doesn't affect the usual behaivour.
+-> Maybe add some prints of the places where this method is called.
+
+---------------------
+
+Guilherme Fernandes
+
+Reviewer Name: Rui Correia
+Code Smell: Dead Code
+
+-> Boa identificação do code smell e uma boa sugestão
+-> Podia ter uma melhor apresentação, mas de resto está bom
+
+Reviewer Name: Tomás Mondim
+Code Smell: Long Method without Comments
+
+-> Talvez referir que tipo de comentários deveriam ser adicionados.
+-> Para além disto parece bem!
+
+Reviewer Name: Sofia Santos
+Code Smell: Data Clump
+
+-> A classificação do code smell parece estar correta.
+-> Deviam talvez estar mencionados quais métodos iriam para a classe nova, tendo cuidado que esta não se tornasse um Data Class code smell.
+
+---------------------
+
+Tomás Mondim
+
+Reviewer Name: Sofia Santos
+Code Smell: Duplicated Code
+
+-> The code smell identification seems to be correct, and the suggestion makes sense.
+-> The explanation could have some grammar fixes.
+
+Reviewer Name: Rui Correia
+Code Smell: Dead Code
+
+-> The dead code detection seems to be correct and well explained, as well as the suggestion
+-> Only fix would be some grammar errors.
+
+Reviewer Name: Pedro Grilo
+Code Smell: Long Method without Comments
+
+-> O código identificado parece estar correto e de acordo com o code smell "No comments".
+-> Contém uma boa explicação de sugestão!
+-> Contém alguns erros de gramática!

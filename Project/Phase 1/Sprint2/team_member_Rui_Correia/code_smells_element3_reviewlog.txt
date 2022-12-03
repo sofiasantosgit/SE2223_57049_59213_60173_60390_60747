@@ -1,0 +1,18 @@
+Reviewer Name: Pedro Grilo
+Code Smell: Duplicated Code
+
+-> Sim, refereste a código duplicado, mas a tua sugestão podia ter que o catch
+podia ter um "OR" como condição e assim também evitava a repetição de código.
+-> De resto está ok!
+---------------------------------------------------
+Reviewer Name: Tomas Mondim
+Code Smell: Long method without comments
+->falta uma explicação mais detalhada de que tipo de comentarios se deveria adicionar.
+-> falta uma sugestão de alteracao para o facto do metodo ser muito longo
+
+---------------------------------------------------
+Reviewer Name: Guilherme Fernandes
+Code Smell: Dead code
+
+-> Should show the rest of the method to check if the commented code doesn't affect the usual behaivour.
+-> Maybe add some prints of the places where this method is called.

@@ -1,9 +1,11 @@
-GanttProject
-============
-[![Build Status] (https://travis-ci.org/bardsoftware/ganttproject.svg?branch=master)](https://travis-ci.org/bardsoftware/ganttproject)
+# GanttProject
 
-GanttProject is an open-source desktop project scheduling and management tool. It is written in Java/Swing.
+### The STeam
 
-This repository is a mirror of the [main Mercurial repository](https://code.google.com/p/ganttproject/source/browse/) on Google Code Hosting. It is almost always as actual as the main one (may be just a few commits behind). We synchronize repositories with [hg-git](http://hg-git.github.io/)
-
-Pull requests are welcome. Please read the [instructions on building the code](https://code.google.com/p/ganttproject/wiki/BuildingGanttProject).
+**Name** | **Number** | **Git**
+--- | --- | ---
+Cláudia Santos | 57049 | sofiasantosgit
+Pedro Grilo | 59213 | PedroGrilo
+Guilherme Fernandes | 60173 | GuilhermeNisa
+Rui Correia | 60390 | rjr-correia
+Tomás Mondim | 60747 | TomasMondim
