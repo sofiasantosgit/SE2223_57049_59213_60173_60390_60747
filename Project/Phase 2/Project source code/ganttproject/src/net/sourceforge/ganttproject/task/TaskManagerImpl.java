@@ -344,7 +344,7 @@ public class TaskManagerImpl implements TaskManager {
     return new TaskBuilder() {
       @Override
       public Task build() {
-
+        System.out.println("HERE TASK BUILDER");
         if (myId == null || myTaskMap.getTask(myId) != null) {
           myId = getAndIncrementId();
         }
@@ -421,11 +421,7 @@ public class TaskManagerImpl implements TaskManager {
       }
     };
   }
-  @Override
-  public FileCollection getFiles() {
-    System.out.println("AQUIIIIIIIIIIIIIIIIIIIIIII");
-    return new FileCollectionImpl();
-  }
+
 
   protected TimeUnitStack getTimeUnitStack() {
     return getConfig().getTimeUnitStack();
@@ -1082,6 +1078,7 @@ public class TaskManagerImpl implements TaskManager {
 
   private void importData(Task importRoot, Task root,
       Map<CustomPropertyDefinition, CustomPropertyDefinition> customPropertyMapping, Map<Task, Task> original2imported) {
+    System.out.println("import data");
     Task[] nested = importRoot.getManager().getTaskHierarchy().getNestedTasks(importRoot);
     for (int i = 0; i < nested.length; i++) {
       TaskManager.TaskBuilder builder = newTaskBuilder();

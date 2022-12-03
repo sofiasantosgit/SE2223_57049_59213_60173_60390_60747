@@ -52,8 +52,11 @@ public class TaskFilesPanel {
   private JTable myTable;
   private JFileChooser fileChooser = new JFileChooser();
 
-  public TaskFilesPanel(FileCollection fileCollection){
+  private Task task;
+
+  public TaskFilesPanel(Task task, FileCollection fileCollection){
     myFileCollection = fileCollection;
+    this.task = task;
   }
 
   private JTable getTable() {
@@ -75,7 +78,9 @@ public class TaskFilesPanel {
         int returnVal = fileChooser.showSaveDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
           File file = fileChooser.getSelectedFile();
-          myModel.addFile(new FileImpl(file.getName(), file.getAbsolutePath()));
+          FileImpl fileImpl = new FileImpl(file.getName(), file.getAbsolutePath());
+          myModel.addFile(fileImpl);
+          task.addFile(fileImpl);
         }
 
       }

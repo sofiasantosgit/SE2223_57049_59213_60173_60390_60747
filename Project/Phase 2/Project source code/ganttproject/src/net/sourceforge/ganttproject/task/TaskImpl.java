@@ -252,6 +252,26 @@ public class TaskImpl implements Task {
     return myName;
   }
 
+  @Override
+  public FileCollection getFiles() {
+    System.out.println("here get files");
+    if(myFileCollection == null) {
+      System.out.println("null ?? ");
+      myFileCollection = new FileCollectionImpl();
+    }
+    return myFileCollection;
+  }
+
+  @Override
+  public void addFile(FileImpl fileImpl) {
+    System.out.println("here add file");
+    if(myFileCollection == null) {
+      myFileCollection = new FileCollectionImpl();
+    }
+    myFileCollection.addFile(fileImpl);
+  }
+
+
   public String getWebLink() {
     return myWebLink;
   }
@@ -336,6 +356,7 @@ public class TaskImpl implements Task {
     }
     return Collections.emptyList();
   }
+
 
   @Override
   public boolean isMilestone() {

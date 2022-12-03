@@ -101,8 +101,6 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private JButton bFile;
 
-  private JFileChooser fileChooser = new JFileChooser();
-
   private JSpinner percentCompleteSlider;
 
   private JComboBox priorityComboBox;
@@ -139,6 +137,7 @@ public class GanttTaskPropertiesBean extends JPanel {
   private int originalEarliestBeginEnabled;
 
   private boolean originalIsProjectTask;
+  private FileCollection originalFileCollection;
 
   private String originalNotes;
 
@@ -181,7 +180,6 @@ public class GanttTaskPropertiesBean extends JPanel {
     myHumanResourceManager = project.getHumanResourceManager();
     myRoleManager = project.getRoleManager();
     myTaskManager = project.getTaskManager();
-    myFileCollection = myTaskManager.getFiles();
     myProject = project;
     myUIfacade = uifacade;
     init();
@@ -199,7 +197,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     //TODO  FILE: 2. Remove a file from the task
     //TODO  FILE: 3. Open a file from the task
 
-    myFilesPanel = new TaskFilesPanel(myFileCollection);
+    myFilesPanel = new TaskFilesPanel(selectedTasks[0],originalFileCollection);
     filePanel = myFilesPanel.getComponent();
   }
 
@@ -697,6 +695,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     originalEarliestBeginDate = task.getThird();
     originalEarliestBeginEnabled = task.getThirdDateConstraint();
     originalIsProjectTask = task.isProjectTask();
+    originalFileCollection = task.getFiles();
   }
 
   private boolean canBeProjectTask(Task testedTask, TaskContainmentHierarchyFacade taskHierarchy) {

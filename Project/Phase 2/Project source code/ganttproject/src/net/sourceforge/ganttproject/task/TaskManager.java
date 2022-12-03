@@ -250,5 +250,4 @@ public interface TaskManager {
 
   GPCalendarListener getCalendarListener();
 
-  FileCollection getFiles();
 }
