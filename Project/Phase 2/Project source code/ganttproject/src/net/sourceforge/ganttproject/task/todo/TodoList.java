@@ -21,8 +21,11 @@ public class TodoList {
     public void markUndone(int i) {
         list.get(i).undone();
     }
-    public ArrayList<Todo> list(){
-        return list;
+    public int size() {
+        return list.size();
+    }
+    public void remove(int i) {
+        list.remove(i);
     }
     public static TodoList getInstance() {
         if (single_list == null)
