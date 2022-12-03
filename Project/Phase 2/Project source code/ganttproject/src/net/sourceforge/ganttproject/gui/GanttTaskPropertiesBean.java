@@ -293,15 +293,6 @@ public class GanttTaskPropertiesBean extends JPanel {
     propertiesPanel.add(new JLabel(language.getText("file")));
     propertiesPanel.add(fontBox);
 
-    /* TOMAS
-    propertiesPanel.add(new JLabel(language.getText("addTodo")));
-    nameFieldTodo = new JTextField(20);
-    nameFieldTodo.setName("name_of_Todo");
-    propertiesPanel.add(nameFieldTodo);
-    String str = nameFieldTodo.getText();
-    if(str!=null)
-      todoList.add(str);
-    /* --------------------------------*/
     Box todoBox = Box.createHorizontalBox();
     nameFieldTodo = new JTextField(20);
     todoBox.add(nameFieldTodo);
@@ -329,7 +320,6 @@ public class GanttTaskPropertiesBean extends JPanel {
     JPanel propertiesWrapper = new JPanel(new BorderLayout());
     propertiesWrapper.add(propertiesPanel, BorderLayout.NORTH);
     generalPanel = new JPanel(new SpringLayout());
-    //generalPanel.add(new JLayer<JPanel>(propertiesPanel, layerUi));
     generalPanel.add(propertiesWrapper);
 
     JPanel sideWrapper = new JPanel(new BorderLayout());
@@ -489,9 +479,6 @@ public class GanttTaskPropertiesBean extends JPanel {
   /** Apply the modified properties to the selected Tasks */
   public void applySettings() {
     for (int i = 0; i < selectedTasks.length; i++) {
-      // TODO The originalXXX values should not be used,
-      // but the original values should be read from each processed task to
-      // determine whether the value has been changed
       TaskMutator mutator = selectedTasks[i].createMutator();
       if (originalName == null || !originalName.equals(getTaskName())) {
         mutator.setName(getTaskName());

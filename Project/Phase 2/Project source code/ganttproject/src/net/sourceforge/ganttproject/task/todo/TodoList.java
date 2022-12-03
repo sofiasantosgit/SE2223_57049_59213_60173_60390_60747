@@ -10,7 +10,7 @@ public class TodoList {
     }
     public int add(String name){
         list.add(new Todo(name));
-        return list.size();
+        return list.size()-1;
     }
     public Todo get(int i) {
         return list.get(i);
