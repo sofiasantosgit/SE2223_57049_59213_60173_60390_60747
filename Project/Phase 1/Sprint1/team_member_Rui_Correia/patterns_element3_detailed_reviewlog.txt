@@ -1,0 +1,26 @@
+Reviewer Name: Pedro Grilo
+Design Pattern: Decorator Method Pattern
+
+-> Parece tudo ótimo, pois mostra a classe abstrata OptionPageProviderBase
+e identificas todas as classes que utilizam essa abstrata.
+Todas essas classes adicionam funcionalidades ao objeto sem alterar a estrutura,
+tal como é pedido no Decorator Pattern.
+
+-> Podia ter prints de snippets de code das classes que utilizam OptionPageProviderBase
+
+---------------------
+Reviewer Name: Tomás Mondim
+Design Pattern: Interpreter Method Pattern
+
+->Deveria ter uma explicaçao sobre o o porquê desta classe usar o Interpreter Method
+->De resto está simples e claro!
+
+---------------------
+
+Reviewer Name: Sofia Santos
+Design Pattern: Singleton Pattern
+
+-> All code snippets should have a label identifying their exact location on the codebase.
+
+-> The explanation as for why it's a Singleton is not enough. There should be an explanation about how the "myUIConfig" is this class' uniqueInstance, and that clients access the sole instance of UIConfiguration only using its access point "getUIConfiguration".
+
