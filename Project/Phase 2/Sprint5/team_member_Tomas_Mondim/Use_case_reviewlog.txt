@@ -1,9 +1,4 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Cláudia Santos
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> The Use Case diagram seems perfectly fine. 
+The Use Case descriptions also explain in a short and simple way who and what is being done in these Use Cases.
