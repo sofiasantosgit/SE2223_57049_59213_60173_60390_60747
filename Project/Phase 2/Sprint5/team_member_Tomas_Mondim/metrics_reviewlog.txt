@@ -2,5 +2,3 @@ Reviewer Name: Pedro Grilo
 
 -> A métrica escolhida foi a Dependency Metrics, que mede a dependência entre classes.
 -> Parece-me tudo correto, mas faltou ser mais detalhado em relação à solução de problemas encontrados.
--> O gráfico está bom, mas não é muito percetivel, pois tem muitas classes, mas isso não é problema do Tomás, pois,
-existem muitas classes no projeto.
