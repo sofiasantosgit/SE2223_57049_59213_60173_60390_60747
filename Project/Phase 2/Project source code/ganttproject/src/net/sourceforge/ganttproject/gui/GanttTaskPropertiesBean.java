@@ -278,7 +278,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     todoBox.add(nameFieldTodo);
     todoBox.add(Box.createHorizontalStrut(2));
     JButton bTodo = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/8x8/add.png")));
-    bTodo.setToolTipText(GanttProject.getToolTip("Add To-Do"));
+    bTodo.setToolTipText(GanttProject.getToolTip(language.getText("addTodo")));
     todoBox.add(bTodo);
     bTodo.addActionListener(new ActionListener() {
       @Override
@@ -295,7 +295,7 @@ public class GanttTaskPropertiesBean extends JPanel {
       }
     });
 
-    propertiesPanel.add(new JLabel("Add To-Do"));
+    propertiesPanel.add(new JLabel(language.getText("addTodo")));
     propertiesPanel.add(todoBox);
 
 
@@ -387,7 +387,7 @@ public class GanttTaskPropertiesBean extends JPanel {
 
   private void constructTodoPanel() {
     thirdRowPanelTodos = new JPanel(new BorderLayout());
-    UIUtil.createTitle(thirdRowPanelTodos, "To-Do");
+    UIUtil.createTitle(thirdRowPanelTodos, language.getText("todo"));
 
     todoChecks = new ArrayList<>();
     todoPanel = new JPanel(new SpringLayout());
@@ -408,7 +408,7 @@ public class GanttTaskPropertiesBean extends JPanel {
     check.setName(IDname);
     todoBox.add(check);
     JButton bDelete = new TestGanttRolloverButton(new ImageIcon(getClass().getResource("/icons/8x8/remove.png")));
-    bDelete.setToolTipText(GanttProject.getToolTip("Delete To-Do"));
+    bDelete.setToolTipText(GanttProject.getToolTip(language.getText("deleteTodo")));
     bDelete.setName(IDname);
     todoBox.add(bDelete);
     bDelete.addActionListener(new ActionListener() {

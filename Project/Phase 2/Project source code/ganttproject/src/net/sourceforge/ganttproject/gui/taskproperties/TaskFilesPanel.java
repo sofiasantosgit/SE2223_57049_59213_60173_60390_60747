@@ -79,8 +79,6 @@ public class TaskFilesPanel {
                 if (myTable.isEditing()) {
                     myTable.getCellEditor().stopCellEditing();
                 }
-                System.out.println("Delete file");
-                System.out.println(myTable.getSelectedRow());
                 myModel.delete(getTable().getSelectedRows());
             }
 
