@@ -1,4 +1,4 @@
 Reviewer Name: Pedro Grilo
 
--> A métrica escolhida foi a Dependency Metrics, que mede a dependência entre classes.
--> Parece-me tudo correto, mas faltou ser mais detalhado em relação à solução de problemas encontrados.
+-> A métrica escolhida foi a Mood Metrics, no qual foi bem explicada
+-> De resto, o trabalho está bem feito, com uma boa descrição do problema e das soluções
