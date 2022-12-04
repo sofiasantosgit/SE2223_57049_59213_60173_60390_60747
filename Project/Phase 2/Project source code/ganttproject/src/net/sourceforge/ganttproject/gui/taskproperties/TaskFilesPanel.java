@@ -88,12 +88,17 @@ public class TaskFilesPanel {
         // add double click listener, to open the file
         myTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getClickCount() == 2) {
+
+                if (e.getClickCount() == 2 && myFileCollection.size() > 0) {
                     int selectedRow = myTable.getSelectedRow();
-                    try {
-                        Desktop.getDesktop().open(new java.io.File((String) myTable.getValueAt(selectedRow, 1)));
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                    String selectedFile = (String) myTable.getValueAt(selectedRow, 1);
+                    System.out.println(selectedFile);
+                    if(selectedFile != null && selectedFile.length() > 0) {
+                        try {
+                            Desktop.getDesktop().open(new java.io.File(selectedFile));
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 }
             }
