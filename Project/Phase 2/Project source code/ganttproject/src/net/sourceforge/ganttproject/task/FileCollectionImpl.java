@@ -56,7 +56,7 @@ public class FileCollectionImpl implements FileCollection {
     @Override
     public File get(int index) {
         Object firstKey = files.keySet().toArray()[index];
-        System.out.println("file: " + firstKey);
+        //System.out.println("file: " + firstKey);
         return files.get(firstKey);
     }
 

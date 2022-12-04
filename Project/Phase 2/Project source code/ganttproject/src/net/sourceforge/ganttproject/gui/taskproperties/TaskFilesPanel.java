@@ -63,15 +63,12 @@ public class TaskFilesPanel {
                 getTable()) {
             @Override
             protected void onAddEvent() {
-
-                System.out.println("Add file");
                 int returnVal = fileChooser.showSaveDialog(null);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     java.io.File file = fileChooser.getSelectedFile();
                     FileImpl fileImpl = new FileImpl(file.getName(), file.getAbsolutePath());
                     myModel.addFile(fileImpl);
                 }
-
             }
 
             @Override
@@ -84,25 +81,27 @@ public class TaskFilesPanel {
 
             @Override
             protected File getValue(int row) {
-                File file = myFileCollection.get(row);
-                myTable.addMouseListener(new MouseAdapter() {
-                    public void mouseClicked(java.awt.event.MouseEvent e) {
-                        if (e.getClickCount() == 2) {
-                            int selectedRow = myTable.getSelectedRow();
-                            try {
-                                Desktop.getDesktop().open(new java.io.File((String) myTable.getValueAt(selectedRow, 1)));
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
-                    }
-                });
-                return file;
+                return myFileCollection.get(row);
             }
         };
 
+        // add double click listener, to open the file
+        myTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int selectedRow = myTable.getSelectedRow();
+                    try {
+                        Desktop.getDesktop().open(new java.io.File((String) myTable.getValueAt(selectedRow, 1)));
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        });
+
         return CommonPanel.createTableAndActions(myTable, tableAndActions.getActionsComponent());
     }
+
 
     public void init(FileCollection fileCollection) {
         myFileCollection = fileCollection;
