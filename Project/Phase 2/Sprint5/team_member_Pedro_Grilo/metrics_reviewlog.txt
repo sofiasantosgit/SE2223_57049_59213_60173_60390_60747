@@ -1,9 +1,4 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Guilherme Fernandes
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> Detailed explanation of the metrics and breakdown of the problem, well done!
+-> Only thing I have to point out is that the suggestion of improvement is not the best. The amount of setters and getters needed for this implemenation could lead to some bad practice and hard to understand code. Apart from that looks really good to me!
