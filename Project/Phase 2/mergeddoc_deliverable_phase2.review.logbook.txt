@@ -1,0 +1,67 @@
+------------------------------------ Use Cases ------------------------------------ 
+
+Person: Cláudia Santos
+Reviewer Name: Rui Correia
+
+-> Tanto o diagrama como as descrições explicam de forma completa, simples e clara o sistema.
+
+
+Person: Pedro Grilo
+Reviewer Name: Tomás Mondim
+
+-> Parece me perfeitamente bem.
+
+
+Person: Rui Correia
+Reviewer Name: Guilherme Fernandes
+
+-> Looks good to me!
+
+
+Person: Guilherme Fernandes
+Reviewer Name: Pedro Grilo
+
+-> Os Diagramas dos Use Cases parecem-me bem feitos, poderia estar melhor se desse um exemplo com um secondary actor, mas no geral está bom.
+-> O Guilherme explica bem em cada descrição o que se passa em cada um dos Use Cases de forma simples e clara.
+
+
+Person: Tomás Mondim
+Reviewer Name: Cláudia Santos
+
+-> The Use Case diagram seems perfectly fine. 
+The Use Case descriptions also explain in a short and simple way who and what is being done in these Use Cases.
+
+
+------------------------------------ Metrics ------------------------------------ 
+
+Person: Cláudia Santos
+Reviewer Name: Tomás Mondim
+
+-> Explicação simples e concisa sobre os problemas que o valor elevado do Ce podem indicar, creio que era isto que se pedia.
+
+
+Person: Pedro Grilo
+Reviewer Name: Guilherme Fernandes
+
+-> Detailed explanation of the metrics and breakdown of the problem, well done!
+-> Only thing I have to point out is that the suggestion of improvement is not the best. The amount of setters and getters needed for this implemenation could lead to some bad practice and hard to understand code. Apart from that looks really good to me!
+
+
+Person: Rui Correia
+Reviewer Name: Cláudia Santos
+
+-> Um método ser longo não indica imediatamente complexidade elevada. Se a complexidade é medida sobre os recursos (como memória e tempo) então deverias indicar que estrutura, ciclo, ou método é tão grande ou demorado que poderia causar este peso na complexidade.
+
+
+Person: Guilherme Fernandes
+Reviewer Name: Rui Correia
+
+-> Podia ter adicionado uma descrição mais específica para cada parâmetro.
+-> A análise do código está bem feita e incluir uma menção de outro programador melhora o report.
+
+
+Person: Tomás Mondim
+Reviewer Name: Pedro Grilo
+
+-> A métrica escolhida foi a Mood Metrics, no qual foi bem explicada
+-> De resto, o trabalho está bem feito, com uma boa descrição do problema e das soluções
