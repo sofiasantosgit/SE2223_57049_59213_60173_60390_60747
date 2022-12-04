@@ -1,9 +1,4 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Guilherme Fernandes
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
+-> Looks good to me!
 
--> 
