@@ -1,9 +1,3 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Cláudia Santos
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> Um método ser longo não indica imediatamente complexidade elevada. Se a complexidade é medida sobre os recursos (como memória e tempo) então deverias indicar que estrutura, ciclo, ou método é tão grande ou demorado que poderia causar este peso na complexidade.
