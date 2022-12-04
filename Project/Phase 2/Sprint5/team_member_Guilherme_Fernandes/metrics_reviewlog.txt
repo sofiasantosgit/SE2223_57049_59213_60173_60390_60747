@@ -1,9 +1,4 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Rui Correia
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> Podia ter adicionado uma descrição mais específica para cada parâmetro.
+-> A análise do código está bem feita e incluir uma menção de outro programador melhora o report.
