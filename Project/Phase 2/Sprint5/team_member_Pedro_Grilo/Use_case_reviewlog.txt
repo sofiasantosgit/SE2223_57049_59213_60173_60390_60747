@@ -1,9 +1,3 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Tomas Mondim
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> Parece me perfeitamente bem.
