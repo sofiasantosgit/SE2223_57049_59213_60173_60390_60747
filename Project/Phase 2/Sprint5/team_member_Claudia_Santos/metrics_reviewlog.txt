@@ -1,9 +1,3 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Tomás Mondim
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> Explicaçao simples e concisa sobre os problemas que o valor elevado do Ce podem indicar, creio que era isto que se pedia.
