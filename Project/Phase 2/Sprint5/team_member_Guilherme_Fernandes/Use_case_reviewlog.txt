@@ -1,9 +1,4 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Pedro Grilo
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> Os Diagramas dos Use Cases parecem-me bem feitos, poderia estar melhor se desse um exemplo com um secondary actor, mas no geral está bom.
+-> O Guilherme explica bem em cada descrição o que se passa em cada um dos Use Cases de forma simples e clara.
