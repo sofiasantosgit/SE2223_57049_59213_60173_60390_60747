@@ -1,9 +1,3 @@
-Reviewer Name: 
-Code Smell: 
+Reviewer Name: Rui Correia
 
--> 
----------------------
-Reviewer Name: 
-Code Smell: 
-
--> 
+-> Tanto o diagrama como as descrições explicam de forma completa, simples e clara o sistema.
